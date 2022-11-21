@@ -20,6 +20,6 @@ class Auswerter:
 
         #Ließt die CSV-Dateien ein
         def inputData():
-            filedialog.askopenfilename()
+            filedialog.askopenfilename(filetypes=("*.png")
 
 Auswerter()
