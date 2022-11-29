@@ -20,7 +20,6 @@ class Auswerter:
             filedialog.askopenfilename(filetypes=("*.csv"))
 
         def create_window(self):
-            global window
             self.window = Tk.Toplevel(self)
 
 Auswerter()
