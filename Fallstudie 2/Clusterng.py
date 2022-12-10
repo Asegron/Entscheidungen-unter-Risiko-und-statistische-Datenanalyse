@@ -1,11 +1,6 @@
 import matplotlib.pyplot as plt
-import pylab as pl
-from kneed import KneeLocator
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
-from sklearn.metrics import silhouette_score
-from sklearn.preprocessing import StandardScaler
-import random
 import numpy as np
 
 deviation = np.random.uniform(1, 3)
