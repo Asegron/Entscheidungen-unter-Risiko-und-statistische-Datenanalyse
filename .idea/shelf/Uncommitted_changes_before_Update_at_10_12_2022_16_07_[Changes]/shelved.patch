@@ -1,0 +1,269 @@
+Index: Fallstudie 2/Clustering.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 2/Clustering.py b/Fallstudie 2/Clustering.py
+new file mode 100644
+--- /dev/null	(date 1670641741785)
++++ b/Fallstudie 2/Clustering.py	(date 1670641741785)
+@@ -0,0 +1,33 @@
++import matplotlib.pyplot as plt
++from sklearn.datasets import make_blobs
++from sklearn.cluster import KMeans
++import numpy as np
++from sklearn.preprocessing import StandardScaler
++import seaborn
++
++deviation = np.random.uniform(1, 3)
++
++X_train, y_true = make_blobs(
++    n_samples=100,
++    centers=100,
++    cluster_std=deviation,
++    random_state=None
++)
++X = StandardScaler().fit_transform(X_train)
++
++ranCluster = np.random.randint(1, 10)
++kmeans = KMeans(
++    init="random",
++    n_clusters=ranCluster,
++    n_init=10,
++    max_iter=300,
++    random_state=42
++)
++
++seaborn.scatterplot(x=[X[0] for X in X_train],
++                    y=[X[1] for X in X_train],
++                    hue=y_true,
++                    palette="deep",
++                    legend=None
++                    )
++plt.show()
+Index: Fallstudie 2/KMeans.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 2/KMeans.py b/Fallstudie 2/KMeans.py
+new file mode 100644
+--- /dev/null	(date 1670642108059)
++++ b/Fallstudie 2/KMeans.py	(date 1670642108059)
+@@ -0,0 +1,52 @@
++import matplotlib.pyplot as plt
++from sklearn.datasets import make_blobs
++from sklearn.cluster import KMeans
++import numpy as np
++from sklearn.preprocessing import StandardScaler
++import seaborn
++
++
++class KMeans:
++    def __init__(self, n_clusters=8, max_iter=300):
++        self.n_clusters = n_clusters
++        self.max_iter = max_iter#
++
++    def fit(self, X_train):
++        # Randomly select centroid start points, uniformly distributed across the domain of the dataset
++        min_, max_ = np.min(X_train, axis=0), np.max(X_train, axis=0)
++        self.centroids = [uniform(min_, max_) for _ in range(self.n_clusters)]
++        # Iterate, adjusting centroids until converged or until passed max_iter
++        iteration = 0
++        prev_centroids = None
++        while np.not_equal(self.centroids, prev_centroids).any() and iteration < self.max_iter:
++            # Sort each datapoint, assigning to nearest centroid
++            sorted_points = [[] for _ in range(self.n_clusters)]
++            for x in X_train:
++                dists = euclidean(x, self.centroids)
++                centroid_idx = np.argmin(dists)
++                sorted_points[centroid_idx].append(x)
++            # Push current centroids to previous, reassign centroids as mean of the points belonging to them
++            prev_centroids = self.centroids
++            self.centroids = [np.mean(cluster, axis=0) for cluster in sorted_points]
++            for i, centroid in enumerate(self.centroids):
++                if np.isnan(centroid).any():  # Catch any np.nans, resulting from a centroid having no points
++                    self.centroids[i] = prev_centroids[i]
++            iteration += 1
++            
++            kmeans = KMeans(n_clusters=centers)
++            kmeans.fit(X_train)
++            # View results
++            class_centers, classification = kmeans.evaluate(X_train)
++            sns.scatterplot(x=[X[0] for X in X_train],
++                            y=[X[1] for X in X_train],
++                            hue=true_labels,
++                            style=classification,
++                            palette="deep",
++                            legend=None
++                            )
++            plt.plot([x for x, _ in kmeans.centroids],
++                     [y for _, y in kmeans.centroids],
++                     '+',
++                     markersize=10,
++                     )
++            plt.show()
+\ No newline at end of file
+Index: Fallstudie 2/Data.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 2/Data.py b/Fallstudie 2/Data.py
+new file mode 100644
+--- /dev/null	(date 1670644387761)
++++ b/Fallstudie 2/Data.py	(date 1670644387761)
+@@ -0,0 +1,43 @@
++import numpy as np
++
++
++k = 0
++anzahlDatenpunkte = k*100
++axisX = 0
++axisY = 0
++datenPunkte = []
++
++#Aufgabenteil A
++def daten(self):
++
++    k = np.random.randint(1, 10)
++
++    datenPunkte = []
++    ausgangsPunkteArray = []
++    for i in range(k):
++        axisX = np.random.randint(-100, 100)
++        axisY =  np.random.randint(-100, 100)
++        Ausgangspunkt = [axisX,axisY]
++
++        ausgangsPunkteArray.append(Ausgangspunkt)
++
++        datenpunktProAusgangspunkt= []
++        for j in range(100):
++
++            ci = ausgangsPunkteArray[i]
++
++            location = np.random.randint(1, 360)
++            sigma = np.random.randint(0, 3)
++
++            axisX = ci[0] + np.ceil(np.cos(location) * sigma)
++            axisY = ci[i] + np.ceil(np.sin(location) * sigma)
++
++            datenpunkt = [axisX, axisY]
++
++            datenpunktProAusgangspunkt.append(datenpunkt)
++
++def kmeans(self):
++
++    cluster = []
++
++    clusterzentren=
+\ No newline at end of file
+Index: Fallstudie 2/scratch.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 2/scratch.py b/Fallstudie 2/scratch.py
+new file mode 100644
+--- /dev/null	(date 1670644151201)
++++ b/Fallstudie 2/scratch.py	(date 1670644151201)
+@@ -0,0 +1,80 @@
++import numpy as np # linear algebra
++import pandas as pd # data processing, CSV file I/O (e.g. pd.read_csv)
++import os
++import matplotlib.pyplot as plt
++from sklearn import cluster
++from sklearn import preprocessing
++import plotly.express as px
++from sklearn.datasets import make_blobs
++plt.style.use('dark_background')
++
++class KMeansClustering:
++    def __init__(self, X, num_clusters):
++        self.K = num_clusters  # cluster number
++        self.max_iterations = 100  # max iteration. don't want to run inf time
++        self.num_examples, self.num_features = X.shape  # num of examples, num of features
++        self.plot_figure = True  # plot figure
++
++    # randomly initialize centroids
++    def initialize_random_centroids(self, X):
++        centroids = np.zeros((self.K, self.num_features))  # row , column full with zero
++        for k in range(self.K):  # iterations of
++            centroid = X[np.random.choice(range(self.num_examples))]  # random centroids
++            centroids[k] = centroid
++        return centroids  # return random centroids
++
++    # create cluster Function
++    def create_cluster(self, X, centroids):
++        clusters = [[] for _ in range(self.K)]
++        for point_idx, point in enumerate(X):
++            closest_centroid = np.argmin(
++                np.sqrt(np.sum((point - centroids) ** 2, axis=1))
++            )  # closest centroid using euler distance equation(calculate distance of every point from centroid)
++            clusters[closest_centroid].append(point_idx)
++        return clusters
++
++        # new centroids
++
++    def calculate_new_centroids(self, cluster, X):
++        centroids = np.zeros((self.K, self.num_features))  # row , column full with zero
++        for idx, cluster in enumerate(cluster):
++            new_centroid = np.mean(X[cluster], axis=0)  # find the value for new centroids
++            centroids[idx] = new_centroid
++        return centroids
++
++    # prediction
++    def predict_cluster(self, clusters, X):
++        y_pred = np.zeros(self.num_examples)  # row1 fillup with zero
++        for cluster_idx, cluster in enumerate(clusters):
++            for sample_idx in cluster:
++                y_pred[sample_idx] = cluster_idx
++        return y_pred
++
++    # plotinng scatter plot
++    def plot_fig(self, X, y):
++        fig = px.scatter(X[:, 0], X[:, 1], color=y)
++        fig.show()  # visualize
++
++    # fit data
++    def fit(self, X):
++        centroids = self.initialize_random_centroids(X)  # initialize random centroids
++        for _ in range(self.max_iterations):
++            clusters = self.create_cluster(X, centroids)  # create cluster
++            previous_centroids = centroids
++            centroids = self.calculate_new_centroids(clusters, X)  # calculate new centroids
++            diff = centroids - previous_centroids  # calculate difference
++            if not diff.any():
++                break
++        y_pred = self.predict_cluster(clusters, X)  # predict function
++        if self.plot_figure:  # if true
++            self.plot_fig(X, y_pred)  # plot function
++        return y_pred
++
++
++if __name__ == "__main__":
++    np.random.seed(10)
++    num_clusters = 3  # num of cluster
++    X, _ = make_blobs(n_samples=1000, n_features=2,
++                      centers=num_clusters)  # create dataset using make_blobs from sklearn datasets
++    Kmeans = KMeansClustering(X, num_clusters)
++    y_pred = Kmeans.fit(X)
+\ No newline at end of file
+Index: Fallstudie 2/Clusterng.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import matplotlib.pyplot as plt\r\nfrom sklearn.datasets import make_blobs\r\nfrom sklearn.cluster import KMeans\r\nimport numpy as np\r\n\r\ndeviation = np.random.uniform(1, 3)\r\n\r\nX, y_true = make_blobs(\r\n    n_samples=100,\r\n    centers=100,\r\n    cluster_std=deviation,\r\n    random_state=None\r\n)\r\n\r\n\r\nranCluster = np.random.randint(1, 10)\r\nkmeans = KMeans(\r\n    init=\"random\",\r\n    n_clusters=ranCluster,\r\n    n_init=10,\r\n    max_iter=300,\r\n    random_state=42\r\n)\r\n\r\nplt.scatter(X[:, 0], X[:, 1], s=50)\r\nplt.show()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 2/Clusterng.py b/Fallstudie 2/Clusterng.py
+--- a/Fallstudie 2/Clusterng.py	(revision 7d8cd1e06852723f7efe3d4eea27391ea36f8ddc)
++++ b/Fallstudie 2/Clusterng.py	(date 1670638094295)
+@@ -12,7 +12,6 @@
+     random_state=None
+ )
+ 
+-
+ ranCluster = np.random.randint(1, 10)
+ kmeans = KMeans(
+     init="random",

@@ -1,0 +1,206 @@
+Index: Fallstudie 1/Auswerter.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import csv\r\nfrom tkinter import *\r\nfrom tkinter import filedialog\r\n\r\nclass Auswerter:\r\n     def __init__(self):\r\n        self.window = Tk()\r\n        self.button1 = Button(self.window,text = \"Wählen Sie eine CSV-Datei zur Analyse aus!\", \r\n                            ).pack(pady=10)\r\n        self.button2 = Button(self.window,text = \"Möchten Sie eine Häufigkeitstabelle oder eine Klassenhäufigkeitstabelle erstellen?\").pack(pady=10)\r\n        self.button3 = Button(self.window,text = \"Möchten Sie ein Balken- oder ein Tortendiagramm erstellen?\").pack(pady=10)\r\n        self.c = Canvas(self.window,\r\n                            width = 400,\r\n                            height = 200)\r\n        self.c.pack()\r\n        self.window.mainloop()\r\n\r\n        #Ließt die CSV-Dateien ein\r\n        def inputData():\r\n            filedialog.askopenfilename(filetypes=(\"*.csv\"))\r\n\r\n        def create_window(self):\r\n            self.window = Tk.Toplevel(self)\r\n\r\nAuswerter()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 1/Auswerter.py b/Fallstudie 1/Auswerter.py
+--- a/Fallstudie 1/Auswerter.py	(revision 7d8cd1e06852723f7efe3d4eea27391ea36f8ddc)
++++ b/Fallstudie 1/Auswerter.py	(date 1670687572370)
+@@ -1,25 +1,80 @@
+ import csv
++from _ast import Lambda
+ from tkinter import *
+ from tkinter import filedialog
++from PIL import ImageTk,Image
++from tkinter import messagebox
++
++def clicked():
++    pass
++
+ 
+ class Auswerter:
+-     def __init__(self):
++    def __init__(self):
+         self.window = Tk()
+-        self.button1 = Button(self.window,text = "Wählen Sie eine CSV-Datei zur Analyse aus!", 
+-                            ).pack(pady=10)
+-        self.button2 = Button(self.window,text = "Möchten Sie eine Häufigkeitstabelle oder eine Klassenhäufigkeitstabelle erstellen?").pack(pady=10)
+-        self.button3 = Button(self.window,text = "Möchten Sie ein Balken- oder ein Tortendiagramm erstellen?").pack(pady=10)
++        self.button1 = Button(self.window, text="Wählen Sie eine CSV-Datei zur Analyse aus!",
++                              ).pack(pady=10)
++        self.button2 = Button(self.window,
++                              text="Möchten Sie eine Häufigkeitstabelle oder eine Klassenhäufigkeitstabelle erstellen?").pack(
++            pady=10)
++        self.button3 = Button(self.window, text="Möchten Sie ein Balken- oder ein Tortendiagramm erstellen?").pack(
++            pady=10)
+         self.c = Canvas(self.window,
+-                            width = 400,
+-                            height = 200)
+-        self.c.pack()
+-        self.window.mainloop()
++                        width=400,
++                        height=200)
++
++        haeufigkeit = int()
++        haeufigkeitsbool = bool()
++        diagramm = int()
++        diagrammbool = ()
++
++        def clicked(self,value):
++            if value = 1:
++                haeufigkeitsbool = true
++            else: haeufigkeitsbool = false
++
++        Radiobutton(self.window, text="Häufigkeitstabelle", variable=haeufigkeit, value=1, command=clicked(haeufigkeit.get())).pack()
++        Radiobutton(self.window, text="Klassenhäufigkeitstabelle", variable=haeufigkeit, value=2, command=clicked()).pack()
+ 
+-        #Ließt die CSV-Dateien ein
+-        def inputData():
++        # Ließt die CSV-Dateien ein
++        def inputData(self):
++            MerkmalReihe = 0  # um merkmale aus der csv zu extrahieren
++            MerkmalNamenListe = list()  # liste in der sie Merkmal namen Gespeichert werden
++            Merkmal0 = list()
++            Merkmal1 = list()
++            Merkmal2 = list()
++            Merkmal3 = list()
++            Merkmal4 = list()
++            Merkmal5 = list()
++            MerkmalAnzahl = 0
+             filedialog.askopenfilename(filetypes=("*.csv"))
++            with open('Motoren.csv') as daten:
++                reader = csv.reader(daten, delimiter=';')
++                for row in reader:
++                    if MerkmalReihe == 0:
++                        MerkmalNamenListe.append(row[0])
++                        MerkmalNamenListe.append(row[1])
++                        MerkmalNamenListe.append(row[2])
++                        MerkmalNamenListe.append(row[3])
++                        MerkmalNamenListe.append(row[3])
++                        MerkmalNamenListe.append(row[5])
++                    MerkmalReihe = MerkmalReihe + 1
++
++                    if MerkmalReihe >= 1:
++                        Merkmal0.append(row[0])
++                        Merkmal1.append(row[1])
++                        Merkmal2.append(row[2])
++                        Merkmal3.append(row[3])
++                        Merkmal4.append(row[4])
++                        Merkmal5.append(row[5])
++                    MerkmalReihe = MerkmalReihe + 1
++                MerkmalReihe = MerkmalReihe - 2
+ 
+         def create_window(self):
+             self.window = Tk.Toplevel(self)
+ 
++        self.c.pack()
++        self.window.mainloop()
++
++
+ Auswerter()
+Index: Fallstudie 1/Algo.py
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import csv\r\nimport numpy as numpy\r\nimport pandas as pandas\r\n\r\n\r\ndef merkmal1():\r\n    datencounter = 0\r\n    testlist = list()\r\n    for row in reader:\r\n\r\n        if datencounter >= 1:\r\n            testlist.append(row[0])\r\n\r\n        datencounter = datencounter + 1\r\n    datencounter = datencounter - 1\r\n    print(datencounter)\r\n    print(testlist)\r\n    counter0 = testlist.count(\"0\")\r\n    counter1 = testlist.count(\"1\")\r\n    print(counter0)\r\n    print(counter1)\r\n    wahrscheinlichkeit0 = (100 / datencounter) * counter0\r\n    wahrscheinlichkeit1 = (100 / datencounter) * counter1\r\n    print(wahrscheinlichkeit0)\r\n    print(wahrscheinlichkeit1)\r\n    df = pandas.DataFrame(\r\n\r\n    )\r\n\r\nwith open('Motoren.csv') as daten:\r\n    reader = csv.reader(daten, delimiter=';')\r\n\r\n    merkmal1()\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/Fallstudie 1/Algo.py b/Fallstudie 1/Algo.py
+--- a/Fallstudie 1/Algo.py	(revision 7d8cd1e06852723f7efe3d4eea27391ea36f8ddc)
++++ b/Fallstudie 1/Algo.py	(date 1670684920432)
+@@ -1,6 +1,17 @@
+ import csv
+ import numpy as numpy
+ import pandas as pandas
++MerkmalReihe =0 # um merkmale aus der csv zu extrahieren
++MerkmalNamenListe = list() #liste in der sie Merkmal namen Gespeichert werden
++Merkmal0 = list()
++Merkmal1 = list()
++Merkmal2 = list()
++Merkmal3 = list()
++Merkmal4 = list()
++Merkmal5 = list()
++MerkmalAnzahl = 0
++
++
+ 
+ 
+ def merkmal1():
+@@ -23,11 +34,71 @@
+     wahrscheinlichkeit1 = (100 / datencounter) * counter1
+     print(wahrscheinlichkeit0)
+     print(wahrscheinlichkeit1)
+-    df = pandas.DataFrame(
++
+ 
+-    )
++def merkmal2():
++    datencounter2 = 0
++    testlist2 = list()
++    for row in reader:
++
++        if datencounter2 >= 1:
++            testlist2.append(row[1])
++
++        datencounter = datencounter + 1
++
++    datencounter2 = datencounter2 - 1
++    print(datencounter2)
++    print(testlist2)
++    counterA = testlist2.count("A")
++    counterB = testlist2.count("B")
++    counterC = testlist2.count("C")
++    print(counterA)
++    print(counterB)
++    print(counterC)
++    wahrscheinlichkeitA = (100 / datencounter2) * counterA
++    wahrscheinlichkeitB = (100 / datencounter2) * counterB
++    wahrscheinlichkeitC = (100 / datencounter2) * counterC
++    print(wahrscheinlichkeitA)
++    print(wahrscheinlichkeitB)
++    print(wahrscheinlichkeitC)
++
+ 
+ with open('Motoren.csv') as daten:
+     reader = csv.reader(daten, delimiter=';')
++    for row in reader:
++        if MerkmalReihe == 0:
++            MerkmalNamenListe.append(row[0])
++            MerkmalNamenListe.append(row[1])
++            MerkmalNamenListe.append(row[2])
++            MerkmalNamenListe.append(row[3])
++            MerkmalNamenListe.append(row[3])
++            MerkmalNamenListe.append(row[5])
++        MerkmalReihe = MerkmalReihe +1
++
++        if MerkmalReihe >= 1:
++            Merkmal0.append(row[0])
++            Merkmal1.append(row[1])
++            Merkmal2.append(row[2])
++            Merkmal3.append(row[3])
++            Merkmal4.append(row[4])
++            Merkmal5.append(row[5])
++        MerkmalReihe = MerkmalReihe +1
++    MerkmalReihe= MerkmalReihe -2
++
++
++
++
++    print(MerkmalNamenListe)
++    print(Merkmal0)
++    print(Merkmal1)
++    print(Merkmal2)
++    print(Merkmal3)
++    print(Merkmal4)
++    print(Merkmal5)
++    print(MerkmalReihe)
++
++
+ 
+-    merkmal1()
++
++   #merkmal1()
++    #merkmal2()
+\ No newline at end of file
