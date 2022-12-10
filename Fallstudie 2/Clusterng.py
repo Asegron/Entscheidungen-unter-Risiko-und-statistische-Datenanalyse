@@ -12,7 +12,6 @@ X, y_true = make_blobs(
     random_state=None
 )
 
-
 ranCluster = np.random.randint(1, 10)
 kmeans = KMeans(
     init="random",
