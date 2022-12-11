@@ -1,5 +1,5 @@
 import csv
-import numpy as numpy
+import numpy as np
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
@@ -88,6 +88,11 @@ with open('Motoren.csv') as daten:
         else:
             return (sortedLst[index] + sortedLst[index + 1]) / 2.0
 
+    def quantile(list, quantile):
+        return quantile*0.01 * len(list)
+
+
+
     #Funktion die die Kennzahlen der csv-Datei auswertet.
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
     def kennwertberechnung():
@@ -110,27 +115,30 @@ with open('Motoren.csv') as daten:
         filtered_Merkmal4 = list(filter(lambda x: x.isdigit(), Merkmal4))
         float_list4 = [float(i) for i in filtered_Merkmal4]
 
-        if stichprobenkennwerteIndex.get() == 0:
+        if stichprobenkennwerteIndex.get() == 0: #Mittelwert
             text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
                         Merkmal3[0] + " " + str(average(float_list3)) + "\n" +
                         Merkmal4[0] + " " + str(average(float_list4)) + "\n"
                         )
-        if stichprobenkennwerteIndex.get() == 1:
-            text.insert(END, Merkmal2[0] + " " + str(median(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(median(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(median(float_list4)) + "\n"
+        if stichprobenkennwerteIndex.get() == 1: #Median
+            text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(average(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(average(float_list4)) + "\n"
                         )
-        if stichprobenkennwerteIndex.get() == 2:
+        if stichprobenkennwerteIndex.get() == 2: #Quantile
+            text.insert(END, Merkmal2[0] + " " + str(quantile(float_list2, 25)) + "\n" +
+                        Merkmal3[0] + " " + str(quantile(float_list2, 75)) + "\n" +
+                        Merkmal4[0] + " " + str(quantile(float_list2, 75)) + "\n"
+                        )
+        if stichprobenkennwerteIndex.get() == 3: #Modus
             text.insert(END, "kek")
-        if stichprobenkennwerteIndex.get() == 3:
-            text.insert(END, "kek")
-        if stichprobenkennwerteIndex.get() == 4:
+        if stichprobenkennwerteIndex.get() == 4: #Spannweite
             text.insert(END, "kekW")
-        if stichprobenkennwerteIndex.get() == 5:
+        if stichprobenkennwerteIndex.get() == 5: #Quartilsabstand
             text.insert(END, "kekW")
-        if stichprobenkennwerteIndex.get() == 6:
+        if stichprobenkennwerteIndex.get() == 6: #Streuung
             text.insert(END, "kekW")
-        if stichprobenkennwerteIndex.get() == 7:
+        if stichprobenkennwerteIndex.get() == 7: #Standardabweichung
             text.insert(END, "kekW")
 
     #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
@@ -157,4 +165,4 @@ with open('Motoren.csv') as daten:
 # print(Merkmal5)
 # print(MerkmalReihe)
 # merkmal1()
-# merkmal2(
+# merkmal2())
