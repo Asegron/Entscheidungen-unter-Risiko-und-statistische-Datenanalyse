@@ -1,6 +1,9 @@
 import csv
 import numpy as numpy
 import pandas as pandas
+from tkinter import *
+from PIL import ImageTk,Image
+
 MerkmalReihe =0 # um merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list() #liste in der sie Merkmal namen Gespeichert werden
 Merkmal0 = list()
@@ -10,8 +13,6 @@ Merkmal3 = list()
 Merkmal4 = list()
 Merkmal5 = list()
 MerkmalAnzahl = 0
-
-
 
 
 def merkmal1():
@@ -85,20 +86,52 @@ with open('Motoren.csv') as daten:
         MerkmalReihe = MerkmalReihe +1
     MerkmalReihe= MerkmalReihe -2
 
+    root = Tk()
+    root.title('Statistische Auswertungen')
+
+    x1 = IntVar()
+    x2 = IntVar()
+    x3 = IntVar()
+    haeufigkeitstabellen = ["Häufigkeitstabelle","Klassenhäufigkeitstabelle"]
+    diagramme = ["Balkendiagramm","Tortendiagramm"]
+    stichprobenkennwerte = ["Mittelwert", "Median", "Quantile", "Modus", "Spannweite","Quartilsabstand","Streuung","Standardabweichung"]
+
+    for index in range(len(haeufigkeitstabellen)):
+        radiobutton1 = Radiobutton(root, text=haeufigkeitstabellen[index], variable=x1, value=index)
+        radiobutton1.pack(anchor=W)
+
+    for index in range(len(diagramme)):
+        radiobutton2 = Radiobutton(root, text=diagramme[index], variable=x2, value=index, padx=25)
+        radiobutton2.pack(anchor=W)
+
+    button1 = Button(root,text = "Erstelle Häufigkeitstabelle!").pack(pady=10)
+
+    for index in range(len(stichprobenkennwerte)):
+        radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=x3, value=index)
+        radiobutton1.pack(anchor=W)
+
+    button2 = Button(root,text = "Berechne Kennwert!",).pack(pady=10)
+
+
+    c = Canvas(root,
+               width=200,
+               height=50).pack()
 
 
 
-    print(MerkmalNamenListe)
-    print(Merkmal0)
-    print(Merkmal1)
-    print(Merkmal2)
-    print(Merkmal3)
-    print(Merkmal4)
-    print(Merkmal5)
-    print(MerkmalReihe)
+
+    root.mainloop()
+    #print(MerkmalNamenListe)
+    #print(Merkmal0)
+    #print(Merkmal1)
+    #print(Merkmal2)
+    #print(Merkmal3)
+    #print(Merkmal4)
+    #print(Merkmal5)
+    #print(MerkmalReihe)
 
 
 
 
    #merkmal1()
-    #merkmal2()
+   #merkmal2()
