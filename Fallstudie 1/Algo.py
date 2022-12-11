@@ -63,7 +63,7 @@ def merkmal2():
     print(wahrscheinlichkeitB)
     print(wahrscheinlichkeitC)
 
-
+#Liest die csb-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
     for row in reader:
@@ -84,77 +84,89 @@ with open('Motoren.csv') as daten:
             Merkmal4.append(row[4])
             Merkmal5.append(row[5])
         MerkmalReihe = MerkmalReihe + 1
-MerkmalReihe = MerkmalReihe - 2
+    MerkmalReihe = MerkmalReihe - 2
 
-root = Tk()
-root.title('Statistische Auswertungen')
+    #Erstellt Fenster mit Titel
+    root = Tk()
+    root.title('Statistische Auswertungen')
 
-haeufigkeitsIndex = IntVar()
-diagrammIndex = IntVar()
-stichprobenkennwerteIndex = IntVar()
+    #Variabeln zum Aufruf der verschiedenen Auswahlmöglichkeiten
+    haeufigkeitsIndex = IntVar()
+    diagrammIndex = IntVar()
+    stichprobenkennwerteIndex = IntVar()
 
-haeufigkeitstabellen = ["Häufigkeitstabelle", "Klassenhäufigkeitstabelle"]
-diagramme = ["Balkendiagramm", "Tortendiagramm"]
-stichprobenkennwerte = ["Mittelwert", "Median", "Quantile", "Modus", "Spannweite", "Quartilsabstand", "Streuung",
+    #Auswahlmöglichkeiten im Array gespeichert
+    haeufigkeitstabellen = ["Häufigkeitstabelle", "Klassenhäufigkeitstabelle"]
+    diagramme = ["Balkendiagramm", "Tortendiagramm"]
+    stichprobenkennwerte = ["Mittelwert", "Median", "Quantile", "Modus", "Spannweite", "Quartilsabstand", "Streuung",
                         "Standardabweichung"]
 
-for index in range(len(haeufigkeitstabellen)):
-    radiobutton1 = Radiobutton(root, text=haeufigkeitstabellen[index], variable=haeufigkeitsIndex, value=index)
-    radiobutton1.pack(anchor=W)
+    #Radiobuttons die dem Benutzer ermöglichen eine Auswahl zu tätigen
+    #for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
+    for index in range(len(haeufigkeitstabellen)):
+        radiobutton1 = Radiobutton(root, text=haeufigkeitstabellen[index], variable=haeufigkeitsIndex, value=index)
+        radiobutton1.pack(anchor=W)
+    for index in range(len(diagramme)):
+        radiobutton2 = Radiobutton(root, text=diagramme[index], variable=diagrammIndex, value=index, padx=25)
+        radiobutton2.pack(anchor=W)
 
-for index in range(len(diagramme)):
-    radiobutton2 = Radiobutton(root, text=diagramme[index], variable=diagrammIndex, value=index, padx=25)
-    radiobutton2.pack(anchor=W)
-
-button1 = Button(root, text="Erstelle Häufigkeitstabelle!").pack(pady=10)
-
-for index in range(len(stichprobenkennwerte)):
-    radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
-    radiobutton1.pack(anchor=W)
-
-
-def kennwertberechnung():
-    if (stichprobenkennwerteIndex.get() == 0):
-        datencounter2 = 0
-        testlist2 = list()
-        for row in reader:
-
-            if datencounter2 >= 1:
-                testlist2.append(row[1])
-
-            datencounter = datencounter + 1
-
-        datencounter2 = datencounter2 - 1
-
-        text.insert(END, testlist2 + '7777')
-    if (stichprobenkennwerteIndex.get() == 1):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 2):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 3):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 4):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 5):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 6):
-        text.insert(END, "kekW")
-    if (stichprobenkennwerteIndex.get() == 7):
-        text.insert(END, "kekW")
+    #Funktion zur Erstellung der Häufigkeitstabellen. Unfertig und returned null.
+    def haeufigkeitstabellenerstellung():
+        return None
 
 
-Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
+    #Button zur Erstellung der Häufigkeitstabellen. Ruft die Funktion dafür auf.
+    button1 = Button(root, text="Erstelle Häufigkeitstabelle!").pack(pady=10)
 
-def clear():
-    text.delete(1.0, END)
+    # for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
+    for index in range(len(stichprobenkennwerte)):
+        radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
+        radiobutton1.pack(anchor=W)
 
-clear_button = Button(root, text="Text löschen", command=clear).pack()
-text=Text(root, width=40, height=5)
-text.pack()
+    #Funktion die die Kennzahlen der csv-Datei auswertet.
+    #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
+    def kennwertberechnung():
+        if (stichprobenkennwerteIndex.get() == 0):
+            datencounter = 0
+            testlist = list()
+            for row in reader:
 
-Canvas(root, width=200, height=50).pack()
+                if datencounter >= 1:
+                    testlist.append(row[1])
 
-root.mainloop()
+                datencounter = datencounter + 1
+
+        text.insert(END, str(Merkmal0)) #Mittelwert welcher Werte?
+        if (stichprobenkennwerteIndex.get() == 1):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 2):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 3):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 4):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 5):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 6):
+            text.insert(END, "kekW")
+        if (stichprobenkennwerteIndex.get() == 7):
+            text.insert(END, "kekW")
+
+    #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
+    Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
+
+    #Helfsmethode und Anweisungen für einen "Clear" Button der das Textfeld löscht indem der Output eingespeist wurde.
+    def clear():
+        text.delete(1.0, END)
+    clear_button = Button(root, text="Text löschen", command=clear).pack()
+    text=Text(root, width=40, height=5)
+    text.pack()
+    
+    #Erstellt das Fenster für die Anwendung
+    Canvas(root, width=200, height=50).pack()
+
+    #Startet das Programm als Schleife
+    root.mainloop()
 # print(MerkmalNamenListe)
 # print(Merkmal0)
 # print(Merkmal1)
