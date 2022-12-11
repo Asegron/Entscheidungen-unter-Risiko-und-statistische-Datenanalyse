@@ -91,6 +91,8 @@ with open('Motoren.csv') as daten:
     def quantile(list, quantile):
         return quantile*0.01 * len(list)
 
+    def streuung(list):
+        
 
 
     #Funktion die die Kennzahlen der csv-Datei auswertet.
