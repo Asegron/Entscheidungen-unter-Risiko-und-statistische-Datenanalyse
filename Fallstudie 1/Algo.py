@@ -24,7 +24,7 @@ with open('Motoren.csv') as daten:
             MerkmalNamenListe.append(row[1])
             MerkmalNamenListe.append(row[2])
             MerkmalNamenListe.append(row[3])
-            MerkmalNamenListe.append(row[3])
+            MerkmalNamenListe.append(row[4])
             MerkmalNamenListe.append(row[5])
         MerkmalReihe = MerkmalReihe + 1
 
