@@ -15,55 +15,6 @@ Merkmal4 = list()
 Merkmal5 = list()
 MerkmalAnzahl = 0
 
-
-def merkmal1():
-    datencounter = 0
-    testlist = list()
-    for row in reader:
-
-        if datencounter >= 1:
-            testlist.append(row[0])
-
-        datencounter = datencounter + 1
-    datencounter = datencounter - 1
-    print(datencounter)
-    print(testlist)
-    counter0 = testlist.count("0")
-    counter1 = testlist.count("1")
-    print(counter0)
-    print(counter1)
-    wahrscheinlichkeit0 = (100 / datencounter) * counter0
-    wahrscheinlichkeit1 = (100 / datencounter) * counter1
-    print(wahrscheinlichkeit0)
-    print(wahrscheinlichkeit1)
-
-
-def merkmal2():
-    datencounter2 = 0
-    testlist2 = list()
-    for row in reader:
-
-        if datencounter2 >= 1:
-            testlist2.append(row[1])
-
-        datencounter = datencounter + 1
-
-    datencounter2 = datencounter2 - 1
-    print(datencounter2)
-    print(testlist2)
-    counterA = testlist2.count("A")
-    counterB = testlist2.count("B")
-    counterC = testlist2.count("C")
-    print(counterA)
-    print(counterB)
-    print(counterC)
-    wahrscheinlichkeitA = (100 / datencounter2) * counterA
-    wahrscheinlichkeitB = (100 / datencounter2) * counterB
-    wahrscheinlichkeitC = (100 / datencounter2) * counterC
-    print(wahrscheinlichkeitA)
-    print(wahrscheinlichkeitB)
-    print(wahrscheinlichkeitC)
-
 #Liest die csb-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
@@ -128,18 +79,29 @@ with open('Motoren.csv') as daten:
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
     def kennwertberechnung():
 
-        # Concatenate the strings using the join() method
-        Merkmal2String = "".join(Merkmal3)
         # Filter out the integer values using the filter() function
-        filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal2String)
+        filtered_Merkmal2 = filter(lambda x: x.isdigit(), Merkmal2)
         # Convert the iterator to a list
-        filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal2String))
-        float_list2 = [float(i) for i in filtered_Merkmal3]
+        filtered_Merkmal2 = list(filter(lambda x: x.isdigit(), Merkmal2))
+        float_list2 = [float(i) for i in filtered_Merkmal2]
 
+        # Filter out the integer values using the filter() function
+        filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal3)
+        # Convert the iterator to a list
+        filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal3))
+        float_list3 = [float(i) for i in filtered_Merkmal3]
+
+        # Filter out the integer values using the filter() function
+        filtered_Merkmal4 = filter(lambda x: x.isdigit(), Merkmal4)
+        # Convert the iterator to a list
+        filtered_Merkmal4 = list(filter(lambda x: x.isdigit(), Merkmal4))
+        float_list4 = [float(i) for i in filtered_Merkmal4]
 
         if stichprobenkennwerteIndex.get() == 0:
-            text.insert(END, "Lebensdauer" + " " + str(mean(float_list2)) + "\n"
-                        +)
+            text.insert(END, "Lebensdauer" + " " + str(mean(float_list2)) + "\n" +
+                        "T0" + " " + str(mean(float_list3)) + "\n" +
+                        "T30" + " " + str(mean(float_list4)) + "\n"
+                        )
         if stichprobenkennwerteIndex.get() == 1:
             text.insert(END, "kekW")
         if stichprobenkennwerteIndex.get() == 2:
@@ -178,7 +140,5 @@ with open('Motoren.csv') as daten:
 # print(Merkmal4)
 # print(Merkmal5)
 # print(MerkmalReihe)
-
-
 # merkmal1()
 # merkmal2()
