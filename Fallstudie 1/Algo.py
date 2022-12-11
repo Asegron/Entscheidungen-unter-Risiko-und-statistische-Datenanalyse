@@ -98,9 +98,9 @@ with open('Motoren.csv') as daten:
         float_list4 = [float(i) for i in filtered_Merkmal4]
 
         if stichprobenkennwerteIndex.get() == 0:
-            text.insert(END, "Lebensdauer" + " " + str(mean(float_list2)) + "\n" +
-                        "T0" + " " + str(mean(float_list3)) + "\n" +
-                        "T30" + " " + str(mean(float_list4)) + "\n"
+            text.insert(END, Merkmal2[0] + " " + str(mean(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(mean(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(mean(float_list4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 1:
             text.insert(END, "kekW")
