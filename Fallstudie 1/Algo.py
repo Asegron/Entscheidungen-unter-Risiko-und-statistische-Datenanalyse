@@ -3,6 +3,7 @@ import numpy as numpy
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
+from statistics import mean
 
 MerkmalReihe = 0  # um merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list()  # liste in der sie Merkmal namen Gespeichert werden
@@ -63,7 +64,7 @@ def merkmal2():
     print(wahrscheinlichkeitB)
     print(wahrscheinlichkeitC)
 
-#Liest die csv-Datei ein und fügt sie zu einer Liste zusammen
+#Liest die csb-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
     for row in reader:
@@ -125,32 +126,33 @@ with open('Motoren.csv') as daten:
 
     #Funktion die die Kennzahlen der csv-Datei auswertet.
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
-    #Gibt die Kennzahlen anschließend über das Textfeld aus.
     def kennwertberechnung():
-        if (stichprobenkennwerteIndex.get() == 0):
-            datencounter = 0
-            testlist = list()
-            for row in reader:
 
-                if datencounter >= 1:
-                    testlist.append(row[1])
+        # Concatenate the strings using the join() method
+        Merkmal2String = "".join(Merkmal3)
+        # Filter out the integer values using the filter() function
+        filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal2String)
+        # Convert the iterator to a list
+        filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal2String))
+        float_list2 = [float(i) for i in filtered_Merkmal3]
 
-                datencounter = datencounter + 1
 
-        text.insert(END, str(Merkmal0)) #Mittelwert welcher Werte?
-        if (stichprobenkennwerteIndex.get() == 1):
+        if stichprobenkennwerteIndex.get() == 0:
+            text.insert(END, "Lebensdauer" + " " + str(mean(float_list2)) + "\n"
+                        +)
+        if stichprobenkennwerteIndex.get() == 1:
             text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 2):
+        if stichprobenkennwerteIndex.get() == 2:
+            text.insert(END, "kek")
+        if stichprobenkennwerteIndex.get() == 3:
+            text.insert(END, "kek")
+        if stichprobenkennwerteIndex.get() == 4:
             text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 3):
+        if stichprobenkennwerteIndex.get() == 5:
             text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 4):
+        if stichprobenkennwerteIndex.get() == 6:
             text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 5):
-            text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 6):
-            text.insert(END, "kekW")
-        if (stichprobenkennwerteIndex.get() == 7):
+        if stichprobenkennwerteIndex.get() == 7:
             text.insert(END, "kekW")
 
     #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
@@ -162,7 +164,7 @@ with open('Motoren.csv') as daten:
     clear_button = Button(root, text="Text löschen", command=clear).pack()
     text=Text(root, width=40, height=5)
     text.pack()
-    
+
     #Erstellt das Fenster für die Anwendung
     Canvas(root, width=200, height=50).pack()
 
