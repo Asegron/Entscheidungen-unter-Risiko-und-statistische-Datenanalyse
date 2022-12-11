@@ -63,7 +63,7 @@ def merkmal2():
     print(wahrscheinlichkeitB)
     print(wahrscheinlichkeitC)
 
-#Liest die csb-Datei ein und fügt sie zu einer Liste zusammen
+#Liest die csv-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
     for row in reader:
