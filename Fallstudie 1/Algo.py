@@ -125,6 +125,7 @@ with open('Motoren.csv') as daten:
 
     #Funktion die die Kennzahlen der csv-Datei auswertet.
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
+    #Gibt die Kennzahlen anschließend über das Textfeld aus.
     def kennwertberechnung():
         if (stichprobenkennwerteIndex.get() == 0):
             datencounter = 0
