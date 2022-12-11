@@ -3,7 +3,6 @@ import numpy as numpy
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
-from statistics import mean
 
 MerkmalReihe = 0  # um merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list()  # liste in der sie Merkmal namen Gespeichert werden
@@ -75,6 +74,20 @@ with open('Motoren.csv') as daten:
         radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
         radiobutton1.pack(anchor=W)
 
+    #berechnet den Durchschnitt
+    def average(lst):
+        return sum(lst) / len(lst)
+    #berechnet den Median
+    def median(lst):
+        sortedLst = sorted(lst)
+        lstLen = len(lst)
+        index = (lstLen - 1) // 2
+
+        if (lstLen % 2):
+            return sortedLst[index]
+        else:
+            return (sortedLst[index] + sortedLst[index + 1]) / 2.0
+
     #Funktion die die Kennzahlen der csv-Datei auswertet.
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
     def kennwertberechnung():
@@ -98,12 +111,15 @@ with open('Motoren.csv') as daten:
         float_list4 = [float(i) for i in filtered_Merkmal4]
 
         if stichprobenkennwerteIndex.get() == 0:
-            text.insert(END, Merkmal2[0] + " " + str(mean(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(mean(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(mean(float_list4)) + "\n"
+            text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(average(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(average(float_list4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 1:
-            text.insert(END, "kekW")
+            text.insert(END, Merkmal2[0] + " " + str(median(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(median(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(median(float_list4)) + "\n"
+                        )
         if stichprobenkennwerteIndex.get() == 2:
             text.insert(END, "kek")
         if stichprobenkennwerteIndex.get() == 3:
@@ -141,4 +157,4 @@ with open('Motoren.csv') as daten:
 # print(Merkmal5)
 # print(MerkmalReihe)
 # merkmal1()
-# merkmal2()
+# merkmal2(
