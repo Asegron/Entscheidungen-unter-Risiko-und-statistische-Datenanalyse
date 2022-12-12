@@ -75,6 +75,24 @@ with open('Motoren.csv') as daten:
         radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
         radiobutton1.pack(anchor=W)
 
+    # Filter out the integer values using the filter() function
+    filtered_Merkmal2 = filter(lambda x: x.isdigit(), Merkmal2)
+    # Convert the iterator to a list
+    filtered_Merkmal2 = list(filter(lambda x: x.isdigit(), Merkmal2))
+    float_list2 = [float(i) for i in filtered_Merkmal2]
+
+    # Filter out the integer values using the filter() function
+    filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal3)
+    # Convert the iterator to a list
+    filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal3))
+    float_list3 = [float(i) for i in filtered_Merkmal3]
+
+    # Filter out the integer values using the filter() function
+    filtered_Merkmal4 = filter(lambda x: x.isdigit(), Merkmal4)
+    # Convert the iterator to a list
+    filtered_Merkmal4 = list(filter(lambda x: x.isdigit(), Merkmal4))
+    float_list4 = [float(i) for i in filtered_Merkmal4]
+
     #berechnet den Durchschnitt
     def average(lst):
         return sum(lst) / len(lst)
@@ -92,9 +110,16 @@ with open('Motoren.csv') as daten:
     def quantile(lst, quantile):
         return quantile*0.01 * len(lst)
 
+    #Gibt die Streuung zurück
     def streuung(lst):
-        return (1/(len(list)-1)) * (sum(pow(median(lst))))
+        count = 0
 
+        for i in range(len(lst)):
+            variance = (lst[i] - average(lst)) ** 2
+            count += variance
+        return count/len(lst)
+
+    #Gibt die Standardabweichung zurück indem aus der Streuung die Wurzel gezogen wird
     def standardabweichung(list):
         return math.sqrt(streuung(list))
 
@@ -102,24 +127,6 @@ with open('Motoren.csv') as daten:
     #Funktion die die Kennzahlen der csv-Datei auswertet.
     #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
     def kennwertberechnung():
-
-        # Filter out the integer values using the filter() function
-        filtered_Merkmal2 = filter(lambda x: x.isdigit(), Merkmal2)
-        # Convert the iterator to a list
-        filtered_Merkmal2 = list(filter(lambda x: x.isdigit(), Merkmal2))
-        float_list2 = [float(i) for i in filtered_Merkmal2]
-
-        # Filter out the integer values using the filter() function
-        filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal3)
-        # Convert the iterator to a list
-        filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal3))
-        float_list3 = [float(i) for i in filtered_Merkmal3]
-
-        # Filter out the integer values using the filter() function
-        filtered_Merkmal4 = filter(lambda x: x.isdigit(), Merkmal4)
-        # Convert the iterator to a list
-        filtered_Merkmal4 = list(filter(lambda x: x.isdigit(), Merkmal4))
-        float_list4 = [float(i) for i in filtered_Merkmal4]
 
         if stichprobenkennwerteIndex.get() == 0: #Mittelwert
             text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
@@ -150,11 +157,14 @@ with open('Motoren.csv') as daten:
             text.insert(END, "kekW")
         if stichprobenkennwerteIndex.get() == 6: #Streuung
             text.insert(END, Merkmal2[0] + " " + str(streuung(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(streuung(float_list2)) + "\n" +
-                        Merkmal4[0] + " " + str(streuung(float_list2)) + "\n"
+                        Merkmal3[0] + " " + str(streuung(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(streuung(float_list4))
                         )
         if stichprobenkennwerteIndex.get() == 7: #Standardabweichung
-            text.insert(END, "kekW")
+            text.insert(END, Merkmal2[0] + " " + str(standardabweichung(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(standardabweichung(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(standardabweichung(float_list4))
+                        )
 
     #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
     Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
@@ -168,16 +178,5 @@ with open('Motoren.csv') as daten:
 
     #Erstellt das Fenster für die Anwendung
     Canvas(root, width=200, height=50).pack()
-
     #Startet das Programm als Schleife
     root.mainloop()
-# print(MerkmalNamenListe)
-# print(Merkmal0)
-# print(Merkmal1)
-# print(Merkmal2)
-# print(Merkmal3)
-# print(Merkmal4)
-# print(Merkmal5)
-# print(MerkmalReihe)
-# merkmal1()
-# merkmal2()
