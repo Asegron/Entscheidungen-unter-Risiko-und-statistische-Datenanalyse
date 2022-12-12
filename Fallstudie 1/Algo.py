@@ -134,9 +134,9 @@ with open('Motoren.csv') as daten:
                         Merkmal4[0] + " " + str(average(float_list4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 1: #Median
-            text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(average(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(average(float_list4)) + "\n"
+            text.insert(END, Merkmal2[0] + " " + str(median(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(median(float_list3)) + "\n" +
+                        Merkmal4[0] + " " + str(median(float_list4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 2: #Quantile
             text.insert(END, Merkmal2[0] + " 25% " + str(quantile(float_list2, 25)) + "\n" +
