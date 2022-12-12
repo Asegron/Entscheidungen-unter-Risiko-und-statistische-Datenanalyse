@@ -5,8 +5,8 @@ import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
 
-MerkmalReihe = 0  # um merkmale aus der csv zu extrahieren
-MerkmalNamenListe = list()  # liste in der sie Merkmal namen Gespeichert werden
+MerkmalReihe = 0  # um Merkmale aus der csv zu extrahieren
+MerkmalNamenListe = list()  # Liste in der die Merkmanamen gespeichert werden
 Merkmal0 = list()
 Merkmal1 = list()
 Merkmal2 = list()
@@ -15,7 +15,7 @@ Merkmal4 = list()
 Merkmal5 = list()
 MerkmalAnzahl = 0
 
-#Liest die csb-Datei ein und fügt sie zu einer Liste zusammen
+#Liest die csv-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
     for row in reader:
@@ -93,7 +93,7 @@ with open('Motoren.csv') as daten:
         return quantile*0.01 * len(lst)
 
     def streuung(lst):
-        return (1/(len(list)-1)) * (sum(pow(median((lst)))))
+        return (1/(len(list)-1)) * (sum(pow(median(lst))))
 
     def standardabweichung(list):
         return math.sqrt(streuung(list))
