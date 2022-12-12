@@ -1,5 +1,6 @@
 import csv
 import numpy as np
+import math
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
@@ -88,11 +89,14 @@ with open('Motoren.csv') as daten:
         else:
             return (sortedLst[index] + sortedLst[index + 1]) / 2.0
 
-    def quantile(list, quantile):
-        return quantile*0.01 * len(list)
+    def quantile(lst, quantile):
+        return quantile*0.01 * len(lst)
 
-    def streuung(list):
-        
+    def streuung(lst):
+        return (1/(len(list)-1)) * (sum(pow(median((lst)))))
+
+    def standardabweichung(list):
+        return math.sqrt(streuung(list))
 
 
     #Funktion die die Kennzahlen der csv-Datei auswertet.
@@ -128,9 +132,15 @@ with open('Motoren.csv') as daten:
                         Merkmal4[0] + " " + str(average(float_list4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 2: #Quantile
-            text.insert(END, Merkmal2[0] + " " + str(quantile(float_list2, 25)) + "\n" +
-                        Merkmal3[0] + " " + str(quantile(float_list2, 75)) + "\n" +
-                        Merkmal4[0] + " " + str(quantile(float_list2, 75)) + "\n"
+            text.insert(END, Merkmal2[0] + " 25% " + str(quantile(float_list2, 25)) + "\n" +
+                        Merkmal2[0] + " 50% " + str(quantile(float_list2, 75)) + "\n" +
+                        Merkmal2[0] + " 75% " + str(quantile(float_list2, 75)) + "\n" +
+                        Merkmal3[0] + " 25% " + str(quantile(float_list3, 25)) + "\n" +
+                        Merkmal3[0] + " 50% " + str(quantile(float_list3, 75)) + "\n" +
+                        Merkmal3[0] + " 75% " + str(quantile(float_list3, 75)) + "\n" +
+                        Merkmal4[0] + " 25% " + str(quantile(float_list4, 25)) + "\n" +
+                        Merkmal4[0] + " 50% " + str(quantile(float_list4, 75)) + "\n" +
+                        Merkmal4[0] + " 75% " + str(quantile(float_list4, 75)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 3: #Modus
             text.insert(END, "kek")
@@ -139,14 +149,17 @@ with open('Motoren.csv') as daten:
         if stichprobenkennwerteIndex.get() == 5: #Quartilsabstand
             text.insert(END, "kekW")
         if stichprobenkennwerteIndex.get() == 6: #Streuung
-            text.insert(END, "kekW")
+            text.insert(END, Merkmal2[0] + " " + str(streuung(float_list2)) + "\n" +
+                        Merkmal3[0] + " " + str(streuung(float_list2)) + "\n" +
+                        Merkmal4[0] + " " + str(streuung(float_list2)) + "\n"
+                        )
         if stichprobenkennwerteIndex.get() == 7: #Standardabweichung
             text.insert(END, "kekW")
 
     #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
     Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
 
-    #Helfsmethode und Anweisungen für einen "Clear" Button der das Textfeld löscht indem der Output eingespeist wurde.
+    #Hilfsfunktion und Anweisungen für einen "Clear" Button der das Textfeld löscht in dem der Output eingespeist wurde.
     def clear():
         text.delete(1.0, END)
     clear_button = Button(root, text="Text löschen", command=clear).pack()
@@ -167,4 +180,4 @@ with open('Motoren.csv') as daten:
 # print(Merkmal5)
 # print(MerkmalReihe)
 # merkmal1()
-# merkmal2())
+# merkmal2()
