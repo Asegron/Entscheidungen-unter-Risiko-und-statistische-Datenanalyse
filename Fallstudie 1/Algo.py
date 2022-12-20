@@ -1,10 +1,12 @@
 import csv
+
+import matplotlib.pyplot as plt
 import numpy as np
 import math
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
-
+import matplotlib.pyplot as plot
 MerkmalReihe = 0  # um Merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list()  # Liste in der die Merkmanamen gespeichert werden
 Merkmal0 = list()
@@ -64,7 +66,26 @@ with open('Motoren.csv') as daten:
 
     #Funktion zur Erstellung der Häufigkeitstabellen. Unfertig und returned null.
     def haeufigkeitstabellenerstellung():
-        return None
+
+        if haeufigkeitsIndex.get()== 1:
+            counter0 =0
+            counter1 =0
+            print(Merkmal0)
+            for x in Merkmal0:
+
+                if x == "0":
+                 counter0 +=1
+                if x == "1":
+                    counter1 += 1
+
+            print(counter0)
+            print(counter1)
+            data = [["Mod: 0",counter0,"wahrscheinlichkeit0"],
+                ["Mod: 1",counter1,"wahrscheinlichkeit1"]]
+            plot.table(cellText=data,colLabels=["MOD","Häufigkeit","Wahrscheinlichkeit"])
+            plot.show()
+
+
 
 
     #Button zur Erstellung der Häufigkeitstabellen. Ruft die Funktion dafür auf.
