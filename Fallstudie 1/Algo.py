@@ -1,12 +1,14 @@
 import csv
 
+import statistics
 import matplotlib.pyplot as plt
-import numpy as np
 import math
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plot
+from numpy import mean, var
+
 MerkmalReihe = 0  # um Merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list()  # Liste in der die Merkmanamen gespeichert werden
 Merkmal0 = list()
@@ -51,7 +53,7 @@ with open('Motoren.csv') as daten:
 
     #Auswahlmöglichkeiten im Array gespeichert
     haeufigkeitstabellen = ["Häufigkeitstabelle", "Klassenhäufigkeitstabelle"]
-    diagramme = ["Balkendiagramm", "Tortendiagramm"]
+    diagramme = ["Tabelle", "Balkendiagramm", "Tortendiagramm"]
     stichprobenkennwerte = ["Mittelwert", "Median", "Quantile", "Modus", "Spannweite", "Quartilsabstand", "Streuung",
                         "Standardabweichung"]
 
@@ -64,55 +66,39 @@ with open('Motoren.csv') as daten:
         radiobutton2 = Radiobutton(root, text=diagramme[index], variable=diagrammIndex, value=index, padx=25)
         radiobutton2.pack(anchor=W)
 
-    #Funktion zur Erstellung der Häufigkeitstabellen. Unfertig und returned null.
-    def haeufigkeitstabellenerstellung():
-
-        if haeufigkeitsIndex.get()== 1:
-            counter0 =0
-            counter1 =0
-            print(Merkmal0)
-            for x in Merkmal0:
-
-                if x == "0":
-                 counter0 +=1
-                if x == "1":
-                    counter1 += 1
-
-            print(counter0)
-            print(counter1)
-            data = [["Mod: 0",counter0,"wahrscheinlichkeit0"],
-                ["Mod: 1",counter1,"wahrscheinlichkeit1"]]
-            plot.table(cellText=data,colLabels=["MOD","Häufigkeit","Wahrscheinlichkeit"])
-            plot.show()
-
-
-
-
-    #Button zur Erstellung der Häufigkeitstabellen. Ruft die Funktion dafür auf.
-    button1 = Button(root, text="Erstelle Häufigkeitstabelle!").pack(pady=10)
-
     # for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
     for index in range(len(stichprobenkennwerte)):
         radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
         radiobutton1.pack(anchor=W)
 
-    # Filter out the integer values using the filter() function
-    filtered_Merkmal2 = filter(lambda x: x.isdigit(), Merkmal2)
-    # Convert the iterator to a list
-    filtered_Merkmal2 = list(filter(lambda x: x.isdigit(), Merkmal2))
-    float_list2 = [float(i) for i in filtered_Merkmal2]
 
-    # Filter out the integer values using the filter() function
-    filtered_Merkmal3 = filter(lambda x: x.isdigit(), Merkmal3)
-    # Convert the iterator to a list
-    filtered_Merkmal3 = list(filter(lambda x: x.isdigit(), Merkmal3))
-    float_list3 = [float(i) for i in filtered_Merkmal3]
+    def get_number(string):
+        try:
+            return int(string)
+        except ValueError:
+            try:
+                return float(string)
+            except ValueError:
+                return None
 
+    del Merkmal0[0]
+    del Merkmal1[0]
+    del Merkmal2[0]
+    del Merkmal3[0]
+    del Merkmal4[0]
+    del Merkmal5[0]
     # Filter out the integer values using the filter() function
-    filtered_Merkmal4 = filter(lambda x: x.isdigit(), Merkmal4)
     # Convert the iterator to a list
-    filtered_Merkmal4 = list(filter(lambda x: x.isdigit(), Merkmal4))
-    float_list4 = [float(i) for i in filtered_Merkmal4]
+    float_strings0 = [x.replace(',', '.') for x in Merkmal0]
+    float_strings2 = [x.replace(',', '.') for x in Merkmal2]
+    float_strings3 = [x.replace(',', '.') for x in Merkmal3]
+    float_strings4 = [x.replace(',', '.') for x in Merkmal4]
+    float_strings5 = [x.replace(',', '.') for x in Merkmal5]
+    filtered_Merkmal0 = [float(x) if '.' in x else int(x) for x in float_strings0]
+    filtered_Merkmal2 = [float(x) if '.' in x else int(x) for x in float_strings2]
+    filtered_Merkmal3 = [float(x) if '.' in x else int(x) for x in float_strings3]
+    filtered_Merkmal4 = [float(x) if '.' in x else int(x) for x in float_strings4]
+    filtered_Merkmal5 = [float(x) if '.' in x else int(x) for x in float_strings5]
 
     #berechnet den Durchschnitt
     def average(lst):
@@ -141,8 +127,17 @@ with open('Motoren.csv') as daten:
         return count/len(lst)
 
     #Gibt die Standardabweichung zurück indem aus der Streuung die Wurzel gezogen wird
-    def standardabweichung(list):
-        return math.sqrt(streuung(list))
+    def standardabweichung(lst):
+        return math.sqrt(streuung(lst))
+
+    def haeufigkeitstabellen(lst):
+        lists = {}
+        for x in lst:
+            if x in lists:
+                lists[x] += 1
+            else:
+                lists[x] = 1
+        return lists
 
 
     #Funktion die die Kennzahlen der csv-Datei auswertet.
@@ -150,25 +145,25 @@ with open('Motoren.csv') as daten:
     def kennwertberechnung():
 
         if stichprobenkennwerteIndex.get() == 0: #Mittelwert
-            text.insert(END, Merkmal2[0] + " " + str(average(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(average(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(average(float_list4)) + "\n"
+            text.insert(END, "Lebensdauer" + " " + str(average(filtered_Merkmal2)) + "\n" +
+                        "T0" + " " + str(average(filtered_Merkmal3)) + "\n" +
+                        "T30" + " " + str(average(filtered_Merkmal4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 1: #Median
-            text.insert(END, Merkmal2[0] + " " + str(median(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(median(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(median(float_list4)) + "\n"
+            text.insert(END, "Lebensdauer" + " " + str(median(filtered_Merkmal2)) + "\n" +
+                        "T0" + " " + str(median(filtered_Merkmal3)) + "\n" +
+                        "T30" + " " + str(median(filtered_Merkmal4)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 2: #Quantile
-            text.insert(END, Merkmal2[0] + " 25% " + str(quantile(float_list2, 25)) + "\n" +
-                        Merkmal2[0] + " 50% " + str(quantile(float_list2, 75)) + "\n" +
-                        Merkmal2[0] + " 75% " + str(quantile(float_list2, 75)) + "\n" +
-                        Merkmal3[0] + " 25% " + str(quantile(float_list3, 25)) + "\n" +
-                        Merkmal3[0] + " 50% " + str(quantile(float_list3, 75)) + "\n" +
-                        Merkmal3[0] + " 75% " + str(quantile(float_list3, 75)) + "\n" +
-                        Merkmal4[0] + " 25% " + str(quantile(float_list4, 25)) + "\n" +
-                        Merkmal4[0] + " 50% " + str(quantile(float_list4, 75)) + "\n" +
-                        Merkmal4[0] + " 75% " + str(quantile(float_list4, 75)) + "\n"
+            text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal2, 25)) + "\n" +
+                        "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal2, 75)) + "\n" +
+                        "Lebensdauer" + " 75% " + str(quantile(filtered_Merkmal2, 75)) + "\n" +
+                        "T0" + " 25% " + str(quantile(filtered_Merkmal3, 25)) + "\n" +
+                        "T0" + " 50% " + str(quantile(filtered_Merkmal3, 75)) + "\n" +
+                        "T0" + " 75% " + str(quantile(filtered_Merkmal3, 75)) + "\n" +
+                        "T30" + " 25% " + str(quantile(filtered_Merkmal4, 25)) + "\n" +
+                        "T30" + " 50% " + str(quantile(filtered_Merkmal4, 75)) + "\n" +
+                        "T30" + " 75% " + str(quantile(filtered_Merkmal4, 75)) + "\n"
                         )
         if stichprobenkennwerteIndex.get() == 3: #Modus
             text.insert(END, "kek")
@@ -177,15 +172,29 @@ with open('Motoren.csv') as daten:
         if stichprobenkennwerteIndex.get() == 5: #Quartilsabstand
             text.insert(END, "kekW")
         if stichprobenkennwerteIndex.get() == 6: #Streuung
-            text.insert(END, Merkmal2[0] + " " + str(streuung(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(streuung(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(streuung(float_list4))
+            text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2)) + "\n" +
+                        "T0" + " " + str(streuung(filtered_Merkmal3)) + "\n" +
+                        "T30" + " " + str(streuung(filtered_Merkmal4))
                         )
         if stichprobenkennwerteIndex.get() == 7: #Standardabweichung
-            text.insert(END, Merkmal2[0] + " " + str(standardabweichung(float_list2)) + "\n" +
-                        Merkmal3[0] + " " + str(standardabweichung(float_list3)) + "\n" +
-                        Merkmal4[0] + " " + str(standardabweichung(float_list4))
+            text.insert(END, Merkmal2[0] + " " + str(standardabweichung(filtered_Merkmal2)) + "\n" +
+                        "T0" + " " + str(standardabweichung(filtered_Merkmal3)) + "\n" +
+                        "T30" + " " + str(standardabweichung(filtered_Merkmal4))
                         )
+
+    def haeufigkeitstabellenerstellung():
+        if haeufigkeitsIndex.get() == 0 and diagrammIndex.get() == 0:
+            del Merkmal1[0]
+            text.insert(END, Merkmal0[0] + " " + str(haeufigkeitstabellen(filtered_Merkmal0)) + "\n" +
+                        "Fehler" + " " + str(haeufigkeitstabellen(Merkmal1)) + "\n" +
+                        "Lebensdauer" + " " + str(haeufigkeitstabellen(filtered_Merkmal2)) + "\n" +
+                        "T0" + " " + str(haeufigkeitstabellen(filtered_Merkmal3)) + "\n" +
+                        "T30" + " " + str(haeufigkeitstabellen(filtered_Merkmal4)) + "\n" +
+                        "Zuverl" + " " + str(haeufigkeitstabellen(filtered_Merkmal5)) + "\n"
+                        )
+
+    # Button zur Erstellung der Häufigkeitstabellen und Diagramme. Ruft die Funktion dafür auf.
+    Button(root, text="Erstelle Häufigkeitstabelle!", command=haeufigkeitstabellenerstellung).pack()
 
     #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
     Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
