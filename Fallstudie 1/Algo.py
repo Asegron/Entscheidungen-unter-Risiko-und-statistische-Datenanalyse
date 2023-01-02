@@ -1,5 +1,5 @@
 import csv
-
+import numpy
 import statistics
 import matplotlib.pyplot as plt
 import math
@@ -19,7 +19,7 @@ Merkmal4 = list()
 Merkmal5 = list()
 MerkmalAnzahl = 0
 
-#Liest die csv-Datei ein und fügt sie zu einer Liste zusammen
+# Liest die csv-Datei ein und fügt sie zu einer Liste zusammen
 with open('Motoren.csv') as daten:
     reader = csv.reader(daten, delimiter=';')
     for row in reader:
@@ -42,23 +42,25 @@ with open('Motoren.csv') as daten:
         MerkmalReihe = MerkmalReihe + 1
     MerkmalReihe = MerkmalReihe - 2
 
-    #Erstellt Fenster mit Titel
+    # Erstellt Fenster mit Titel
     root = Tk()
     root.title('Statistische Auswertungen')
 
-    #Variabeln zum Aufruf der verschiedenen Auswahlmöglichkeiten
+    # Variabeln zum Aufruf der verschiedenen Auswahlmöglichkeiten
     haeufigkeitsIndex = IntVar()
     diagrammIndex = IntVar()
     stichprobenkennwerteIndex = IntVar()
+    werteIndex = IntVar()
 
-    #Auswahlmöglichkeiten im Array gespeichert
+    # Auswahlmöglichkeiten im Array gespeichert
     haeufigkeitstabellen = ["Häufigkeitstabelle", "Klassenhäufigkeitstabelle"]
     diagramme = ["Tabelle", "Balkendiagramm", "Tortendiagramm"]
     stichprobenkennwerte = ["Mittelwert", "Median", "Quantile", "Modus", "Spannweite", "Quartilsabstand", "Streuung",
-                        "Standardabweichung"]
+                            "Standardabweichung"]
+    werte = ["MOD", "Fehler", "Lebensdauer", "T0", "T30", "Zuverl"]
 
-    #Radiobuttons die dem Benutzer ermöglichen eine Auswahl zu tätigen
-    #for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
+    # Radiobuttons die dem Benutzer ermöglichen eine Auswahl zu tätigen
+    # for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
     for index in range(len(haeufigkeitstabellen)):
         radiobutton1 = Radiobutton(root, text=haeufigkeitstabellen[index], variable=haeufigkeitsIndex, value=index)
         radiobutton1.pack(anchor=W)
@@ -67,19 +69,15 @@ with open('Motoren.csv') as daten:
         radiobutton2.pack(anchor=W)
 
     # for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
+    for index in range(len(werte)):
+        radiobutton3 = Radiobutton(root, text=werte[index], variable=werteIndex, value=index)
+        radiobutton3.pack(anchor=W)
+
+    # for-Loop läuft über die Arrays mit gespeicherten Auswahlmöglichkeiten
     for index in range(len(stichprobenkennwerte)):
-        radiobutton1 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex, value=index)
-        radiobutton1.pack(anchor=W)
-
-
-    def get_number(string):
-        try:
-            return int(string)
-        except ValueError:
-            try:
-                return float(string)
-            except ValueError:
-                return None
+        radiobutton4 = Radiobutton(root, text=stichprobenkennwerte[index], variable=stichprobenkennwerteIndex,
+                                   value=index, padx=25)
+        radiobutton4.pack(anchor=W)
 
     del Merkmal0[0]
     del Merkmal1[0]
@@ -87,8 +85,8 @@ with open('Motoren.csv') as daten:
     del Merkmal3[0]
     del Merkmal4[0]
     del Merkmal5[0]
-    # Filter out the integer values using the filter() function
-    # Convert the iterator to a list
+    # Filtert die Zahlen und wandelt sie in floats um.
+    # Konvertiert dann die String-Listen in Zahlen-Listen.
     float_strings0 = [x.replace(',', '.') for x in Merkmal0]
     float_strings2 = [x.replace(',', '.') for x in Merkmal2]
     float_strings3 = [x.replace(',', '.') for x in Merkmal3]
@@ -100,113 +98,207 @@ with open('Motoren.csv') as daten:
     filtered_Merkmal4 = [float(x) if '.' in x else int(x) for x in float_strings4]
     filtered_Merkmal5 = [float(x) if '.' in x else int(x) for x in float_strings5]
 
-    #berechnet den Durchschnitt
+
+    # berechnet den Durchschnitt
     def average(lst):
-        return sum(lst) / len(lst)
-    #berechnet den Median
+        berechnung = sum(lst) / len(lst)
+        rounded = round(berechnung, 2)
+        return rounded
+
+
+    # berechnet den Median
     def median(lst):
         sortedLst = sorted(lst)
         lstLen = len(lst)
         index = (lstLen - 1) // 2
 
         if (lstLen % 2):
-            return sortedLst[index]
+            berechnung1 = sortedLst[index]
+            rounded1 = round(berechnung1, 2)
+            return rounded1
         else:
-            return (sortedLst[index] + sortedLst[index + 1]) / 2.0
+            berechnung2 = (sortedLst[index] + sortedLst[index + 1]) / 2.0
+            rounded2 = round(berechnung2, 2)
+            return rounded2
 
-    def quantile(lst, quantile):
-        return quantile*0.01 * len(lst)
+    # berechnet die Quantile. Erster Parameter die Liste, zweiter Parameter das gewünschte Quantil, z.B. 0.25 für das untere Quantil.
+    def quantile(lst, p):
+        lst = sorted(lst)
+        n = len(lst)
+        q = p * (n - 1)
+        i = int(q)
+        if i == n - 1:
+            return list[i-1]
+        else:
+            return lst[i-1] + (q - i) * (lst[i] - lst[i-1])
 
-    #Gibt die Streuung zurück
+    def modus(lst):
+        counter = {}
+        for i in lst:
+            if i in counter:
+                counter[i] += 1
+            else:
+                counter[i] = 1
+
+        # Sucht nach dem Schlüssel mit den meisten Elementen.
+        max_count = max(counter.values())
+        for key, value in counter.items():
+            if value == max_count:
+                return key
+            if len(counter.keys()) == 1:
+                raise ValueError('Alle Werte haben die gleiche Häufigkeit!')
+
+    #Berechnet die Spannweite in dem das kleinste Element einer liste von dem größten Element einer Liste subtrahiert wird.
+    def spannweite(lst):
+        berechnung = max(lst) - min(lst)
+        rounded = round(berechnung, 2)
+        return rounded
+
+
+    #Berechnet den Quartilsabstand indem man das erste Quartil vom dritten Quartil subtrahiert.
+    def quartilsabstand(lst):
+        quantil25 = quantile(lst, 0.25)
+        quantil75 = quantile(lst, 0.75)
+        berechnung = quantil75 - quantil25
+        rounded = round(berechnung, 2)
+        return rounded
+
+    # Gibt die Streuung zurück
     def streuung(lst):
-        count = 0
+        formel = sum([(x - average(lst)) ** 2 for x in lst]) / len(lst)
+        return formel
 
-        for i in range(len(lst)):
-            variance = (lst[i] - average(lst)) ** 2
-            count += variance
-        return count/len(lst)
 
-    #Gibt die Standardabweichung zurück indem aus der Streuung die Wurzel gezogen wird
+    # Gibt die Standardabweichung zurück in dem aus der Streuung die Wurzel gezogen wird.
     def standardabweichung(lst):
         return math.sqrt(streuung(lst))
 
+
     def haeufigkeitstabellen(lst):
         lists = {}
-        for x in lst:
-            if x in lists:
-                lists[x] += 1
+        for i in lst:
+            if i in lists:
+                lists[i] += 1
             else:
-                lists[x] = 1
+                lists[i] = 1
         return lists
 
 
-    #Funktion die die Kennzahlen der csv-Datei auswertet.
-    #Logische Auswahl der Indices läuft über die Radiobuttons die die jeweilige Kennzahl auswählt.
+    def balkendiagramm(lst):
+        lists = haeufigkeitstabellen(lst)
+        names = list(lists.keys())
+        values = list(lists.values())
+
+        plt.bar(names, values)
+        plt.title('balkendiagramm')
+        plt.xlabel('Fruit')
+        plt.ylabel('Sales')
+        plt.show()
+
+
+    # Funktion, die die Kennzahlen der csv-Datei auswertet.
+    # Logische Auswahl der Indices läuft über die Radiobuttons das die jeweilige Kennzahl auswählt.
     def kennwertberechnung():
 
-        if stichprobenkennwerteIndex.get() == 0: #Mittelwert
-            text.insert(END, "Lebensdauer" + " " + str(average(filtered_Merkmal2)) + "\n" +
-                        "T0" + " " + str(average(filtered_Merkmal3)) + "\n" +
-                        "T30" + " " + str(average(filtered_Merkmal4)) + "\n"
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "Lebensdauer" + " " + str(average(filtered_Merkmal2)))
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "T0" + " " + str(average(filtered_Merkmal3)))
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "T30" + " " + str(average(filtered_Merkmal4)))
+
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "Lebensdauer" + " " + str(median(filtered_Merkmal2)))
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "T0" + " " + str(median(filtered_Merkmal3)))
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "T30" + " " + str(median(filtered_Merkmal4)))
+
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal2, 0.25)) + "\n" +
+                        "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
+                        "Lebensdauer" + " 75% " + str(quantile(filtered_Merkmal2, 0.75)) + "\n"
                         )
-        if stichprobenkennwerteIndex.get() == 1: #Median
-            text.insert(END, "Lebensdauer" + " " + str(median(filtered_Merkmal2)) + "\n" +
-                        "T0" + " " + str(median(filtered_Merkmal3)) + "\n" +
-                        "T30" + " " + str(median(filtered_Merkmal4)) + "\n"
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "T0" + " 25% " + str(quantile(filtered_Merkmal3, 0.25)) + "\n" +
+                           "T0" + " 50% " + str(quantile(filtered_Merkmal3, 0.50)) + "\n" +
+                           "T0" + " 75% " + str(quantile(filtered_Merkmal3, 0.75)) + "\n"
+                           )
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "T30" + " 25% " + str(quantile(filtered_Merkmal2, 0.25)) + "\n" +
+                           "T30" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
+                           "T30" + " 75% " + str(quantile(filtered_Merkmal2, 0.75)) + "\n"
+                           )
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "Lebensdauer" + " " + str(modus(filtered_Merkmal2)))
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "T0" + " " + str(modus(filtered_Merkmal3)))
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "T30" + " " + str(modus(filtered_Merkmal4)))
+
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+            text.insert(END, "Lebensdauer" + " " + str(spannweite(filtered_Merkmal2))
                         )
-        if stichprobenkennwerteIndex.get() == 2: #Quantile
-            text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal2, 25)) + "\n" +
-                        "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal2, 75)) + "\n" +
-                        "Lebensdauer" + " 75% " + str(quantile(filtered_Merkmal2, 75)) + "\n" +
-                        "T0" + " 25% " + str(quantile(filtered_Merkmal3, 25)) + "\n" +
-                        "T0" + " 50% " + str(quantile(filtered_Merkmal3, 75)) + "\n" +
-                        "T0" + " 75% " + str(quantile(filtered_Merkmal3, 75)) + "\n" +
-                        "T30" + " 25% " + str(quantile(filtered_Merkmal4, 25)) + "\n" +
-                        "T30" + " 50% " + str(quantile(filtered_Merkmal4, 75)) + "\n" +
-                        "T30" + " 75% " + str(quantile(filtered_Merkmal4, 75)) + "\n"
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+            text.insert(END, "T0" + " " + str(spannweite(filtered_Merkmal3))
                         )
-        if stichprobenkennwerteIndex.get() == 3: #Modus
-            text.insert(END, "kek")
-        if stichprobenkennwerteIndex.get() == 4: #Spannweite
-            text.insert(END, "kekW")
-        if stichprobenkennwerteIndex.get() == 5: #Quartilsabstand
-            text.insert(END, "kekW")
-        if stichprobenkennwerteIndex.get() == 6: #Streuung
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+            text.insert(END, "T30" + " " + str(spannweite(filtered_Merkmal4))
+                        )
+
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "Lebensdauer" + " " + str(quartilsabstand(filtered_Merkmal2))
+                        )
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "T0" + " " + str(quartilsabstand(filtered_Merkmal3))
+                        )
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "T30" + " " + str(quartilsabstand(filtered_Merkmal4))
+                        )
+
+
+        if stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2)) + "\n" +
                         "T0" + " " + str(streuung(filtered_Merkmal3)) + "\n" +
                         "T30" + " " + str(streuung(filtered_Merkmal4))
                         )
-        if stichprobenkennwerteIndex.get() == 7: #Standardabweichung
-            text.insert(END, Merkmal2[0] + " " + str(standardabweichung(filtered_Merkmal2)) + "\n" +
+        if stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
+            text.insert(END, "Lebensdauer" + " " + str(standardabweichung(filtered_Merkmal2)) + "\n" +
                         "T0" + " " + str(standardabweichung(filtered_Merkmal3)) + "\n" +
                         "T30" + " " + str(standardabweichung(filtered_Merkmal4))
                         )
 
+
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and diagrammIndex.get() == 0:
-            del Merkmal1[0]
-            text.insert(END, Merkmal0[0] + " " + str(haeufigkeitstabellen(filtered_Merkmal0)) + "\n" +
+            text.insert(END, "MOD" + " " + str(haeufigkeitstabellen(filtered_Merkmal0)) + "\n" +
                         "Fehler" + " " + str(haeufigkeitstabellen(Merkmal1)) + "\n" +
                         "Lebensdauer" + " " + str(haeufigkeitstabellen(filtered_Merkmal2)) + "\n" +
                         "T0" + " " + str(haeufigkeitstabellen(filtered_Merkmal3)) + "\n" +
                         "T30" + " " + str(haeufigkeitstabellen(filtered_Merkmal4)) + "\n" +
                         "Zuverl" + " " + str(haeufigkeitstabellen(filtered_Merkmal5)) + "\n"
                         )
+        if haeufigkeitsIndex.get() == 0 and diagrammIndex.get() == 1:
+            balkendiagramm(filtered_Merkmal0)
+
 
     # Button zur Erstellung der Häufigkeitstabellen und Diagramme. Ruft die Funktion dafür auf.
     Button(root, text="Erstelle Häufigkeitstabelle!", command=haeufigkeitstabellenerstellung).pack()
 
-    #Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
+    # Button zur Erstellung der Kennzahlen. Ruft die Funktion dafür auf.
     Button(root, text="Berechne Kennwert!", command=kennwertberechnung).pack(pady=10)
 
-    #Hilfsfunktion und Anweisungen für einen "Clear" Button der das Textfeld löscht in dem der Output eingespeist wurde.
+
+    # Hilfsfunktion und Anweisungen für einen "Clear" Button der das Textfeld löscht in dem der Output eingespeist wurde.
     def clear():
         text.delete(1.0, END)
+
+
     clear_button = Button(root, text="Text löschen", command=clear).pack()
-    text=Text(root, width=40, height=5)
+    text = Text(root, width=40, height=5)
     text.pack()
 
-    #Erstellt das Fenster für die Anwendung
+    # Erstellt das Fenster für die Anwendung
     Canvas(root, width=200, height=50).pack()
-    #Startet das Programm als Schleife
+    # Startet das Programm als Schleife
     root.mainloop()
