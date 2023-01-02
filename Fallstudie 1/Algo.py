@@ -10,7 +10,7 @@ import matplotlib.pyplot as plot
 from numpy import mean, var
 
 MerkmalReihe = 0  # um Merkmale aus der csv zu extrahieren
-MerkmalNamenListe = list()  # Liste in der die Merkmanamen gespeichert werden
+MerkmalNamenListe = list()  # Liste in der die Merkmalnamen gespeichert werden
 Merkmal0 = list()
 Merkmal1 = list()
 Merkmal2 = list()
@@ -132,6 +132,7 @@ with open('Motoren.csv') as daten:
         else:
             return lst[i-1] + (q - i) * (lst[i] - lst[i-1])
 
+    #Berechnet den Modus, das heißt das Element das am meisten in der Spalte eines Merkmals vorkommt.
     def modus(lst):
         counter = {}
         for i in lst:
