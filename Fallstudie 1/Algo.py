@@ -1,4 +1,5 @@
 import csv
+from collections import Counter
 import numpy
 import statistics
 import matplotlib.pyplot as plt
@@ -184,17 +185,24 @@ with open('Motoren.csv') as daten:
                 lists[i] = 1
         return lists
 
-
     def balkendiagramm(lst):
-        lists = haeufigkeitstabellen(lst)
-        names = list(lists.keys())
-        values = list(lists.values())
+        counter = Counter(lst)
+        werte = list(counter.values())
+        labels = list(counter.keys())
 
-        plt.bar(names, values)
-        plt.title('balkendiagramm')
-        plt.xlabel('Fruit')
-        plt.ylabel('Sales')
+        plt.bar(werte, labels)
+        plt.title('Balkendiagramm')
         plt.show()
+
+    def tortendiagramm(lst):
+        lists = haeufigkeitstabellen(lst)
+        names = lists(list.keys())
+        values = lists(list.values())
+
+        plt.pie(names, labels=values)
+        plt.title('Tortendiagramm')
+        plt.show()
+
 
 
     # Funktion, die die Kennzahlen der csv-Datei auswertet.
@@ -271,16 +279,42 @@ with open('Motoren.csv') as daten:
 
 
     def haeufigkeitstabellenerstellung():
-        if haeufigkeitsIndex.get() == 0 and diagrammIndex.get() == 0:
-            text.insert(END, "MOD" + " " + str(haeufigkeitstabellen(filtered_Merkmal0)) + "\n" +
-                        "Fehler" + " " + str(haeufigkeitstabellen(Merkmal1)) + "\n" +
-                        "Lebensdauer" + " " + str(haeufigkeitstabellen(filtered_Merkmal2)) + "\n" +
-                        "T0" + " " + str(haeufigkeitstabellen(filtered_Merkmal3)) + "\n" +
-                        "T30" + " " + str(haeufigkeitstabellen(filtered_Merkmal4)) + "\n" +
-                        "Zuverl" + " " + str(haeufigkeitstabellen(filtered_Merkmal5)) + "\n"
-                        )
-        if haeufigkeitsIndex.get() == 0 and diagrammIndex.get() == 1:
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1: #Mod
             balkendiagramm(filtered_Merkmal0)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1: #Fehler
+            balkendiagramm(Merkmal1)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1: #Lebensdauer
+            balkendiagramm(filtered_Merkmal2)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1: #T0
+            balkendiagramm(filtered_Merkmal3)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1: #T30
+            balkendiagramm(filtered_Merkmal4)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1: #Zuverl
+           balkendiagramm(filtered_Merkmal5)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 2: #Mod
+            tortendiagramm(filtered_Merkmal0)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 2: #Fehler
+            tortendiagramm(Merkmal1)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 2: #Lebensdauer
+            tortendiagramm(filtered_Merkmal2)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 2: #T0
+            tortendiagramm(filtered_Merkmal3)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 2: #T30
+            haeufigkeitstabellen(filtered_Merkmal4)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 2: #Zuverl
+            tortendiagramm(filtered_Merkmal5)
+
 
 
     # Button zur Erstellung der Häufigkeitstabellen und Diagramme. Ruft die Funktion dafür auf.
