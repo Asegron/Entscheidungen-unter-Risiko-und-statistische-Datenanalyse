@@ -136,7 +136,7 @@ with open('Motoren.csv') as daten:
             return lst[i - 1] + (q - i) * (lst[i] - lst[i - 1])
 
 
-    # Berechnet den Modus, das heißt das Element, das am meisten in der Spalte eines Merkmals vorkommt.
+    # Berechnet den Modus, das heißt das Element, das am neisten in der Spalte eines Merkmals vorkommt.
     def modus(lst):
         counter = {}
         for i in lst:
