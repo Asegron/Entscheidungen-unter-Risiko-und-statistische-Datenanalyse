@@ -190,7 +190,7 @@ with open('Motoren.csv') as daten:
         keys = list(counter.keys())
         values = list(counter.values())
 
-        plt.bar(values, keys)
+        plt.bar(values, labels=keys)
         plt.title('Balkendiagramm')
         plt.show()
 
@@ -199,7 +199,7 @@ with open('Motoren.csv') as daten:
         keys = list(counter.keys())
         values = list(counter.values())
 
-        plt.pie(values, keys)
+        plt.pie(values, labels=keys)
         plt.title('Tortendiagramm')
         plt.show()
 
