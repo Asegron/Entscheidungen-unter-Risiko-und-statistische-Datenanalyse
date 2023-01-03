@@ -187,19 +187,19 @@ with open('Motoren.csv') as daten:
 
     def balkendiagramm(lst):
         counter = Counter(lst)
-        werte = list(counter.values())
-        labels = list(counter.keys())
+        keys = list(counter.keys())
+        values = list(counter.values())
 
-        plt.bar(werte, labels)
+        plt.bar(values, keys)
         plt.title('Balkendiagramm')
         plt.show()
 
     def tortendiagramm(lst):
-        lists = haeufigkeitstabellen(lst)
-        names = lists(list.keys())
-        values = lists(list.values())
+        counter = Counter(lst)
+        keys = list(counter.keys())
+        values = list(counter.values())
 
-        plt.pie(names, labels=values)
+        plt.pie(values, keys)
         plt.title('Tortendiagramm')
         plt.show()
 
