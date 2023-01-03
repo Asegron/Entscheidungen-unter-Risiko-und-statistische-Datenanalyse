@@ -160,7 +160,7 @@ with open('Motoren.csv') as daten:
         return rounded
 
 
-    # Berechnet den Quartilsabstand indem man das erste Quartil vom dritten Quartil subtrahiert.
+    # Berechnet den Quartilsabstand in dem man das erste Quartil vom dritten Quartil subtrahiert.
     def quartilsabstand(lst):
         quantil25 = quantile(lst, 0.25)
         quantil75 = quantile(lst, 0.75)
@@ -283,6 +283,42 @@ with open('Motoren.csv') as daten:
 
 
     def haeufigkeitstabellenerstellung():
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
+            haeufigeitstabelle(filtered_Merkmal0)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
+            haeufigeitstabelle(Merkmal1)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
+            haeufigeitstabelle(filtered_Merkmal2)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
+            haeufigeitstabelle(filtered_Merkmal3)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
+            haeufigeitstabelle(filtered_Merkmal4)
+
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
+            balkendiagramm(filtered_Merkmal5)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
+            balkendiagramm(filtered_Merkmal0)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
+            balkendiagramm(Merkmal1)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
+            balkendiagramm(filtered_Merkmal2)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
+            balkendiagramm(filtered_Merkmal3)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
+            balkendiagramm(filtered_Merkmal4)
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
+            balkendiagramm(filtered_Merkmal5)
+
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
             balkendiagramm(filtered_Merkmal0)
 
