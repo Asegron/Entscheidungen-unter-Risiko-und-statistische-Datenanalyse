@@ -4,6 +4,7 @@ import numpy
 import statistics
 import matplotlib.pyplot as plt
 import math
+from prettytable import PrettyTable
 import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
@@ -180,14 +181,22 @@ with open('Motoren.csv') as daten:
         return math.sqrt(streuung(lst))
 
 
-    def haeufigkeitstabellen(lst):
-        lists = {}
+    def haeufigkeitstabelle(lst):
+        haeufigkeitstabelle = {}
         for i in lst:
-            if i in lists:
-                lists[i] += 1
+            if i in haeufigkeitstabelle:
+                haeufigkeitstabelle[i] += 1
             else:
-                lists[i] = 1
-        return lists
+                haeufigkeitstabelle[i] = 1
+        return haeufigkeitstabelle
+
+
+    def haeufigkeitstabellenerstellung(haeufigkeitstabelle):
+        table = PrettyTable()
+        table.field_names = ["Wert", "Häufigkeit"]
+        for word, frequency in haeufigkeitstabelle.items():
+            table.add_row([word, frequency])
+        return table
 
 
     def balkendiagramm(lst):
@@ -283,76 +292,63 @@ with open('Motoren.csv') as daten:
 
 
     def haeufigkeitstabellenerstellung():
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
-            haeufigeitstabelle(filtered_Merkmal0)
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
-            haeufigeitstabelle(Merkmal1)
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
-            haeufigeitstabelle(filtered_Merkmal2)
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
-            haeufigeitstabelle(filtered_Merkmal3)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
-            haeufigeitstabelle(filtered_Merkmal4)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
-            balkendiagramm(filtered_Merkmal5)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
-            balkendiagramm(filtered_Merkmal0)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
-            balkendiagramm(Merkmal1)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
-            balkendiagramm(filtered_Merkmal2)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
-            balkendiagramm(filtered_Merkmal3)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
-            balkendiagramm(filtered_Merkmal4)
-
-        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
-            balkendiagramm(filtered_Merkmal5)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
-            balkendiagramm(filtered_Merkmal0)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
-            balkendiagramm(Merkmal1)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
-            balkendiagramm(filtered_Merkmal2)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
-            balkendiagramm(filtered_Merkmal3)
-
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
-            balkendiagramm(filtered_Merkmal4)
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
+            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+                        )
+
+        if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
+            balkendiagramm(filtered_Merkmal0)
+
+        if werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
+            balkendiagramm(Merkmal1)
+
+        if werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
+            balkendiagramm(filtered_Merkmal2)
+
+        if werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
+            balkendiagramm(filtered_Merkmal3)
+
+        if werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
+            balkendiagramm(filtered_Merkmal4)
+
+        if werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
             balkendiagramm(filtered_Merkmal5)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 2:  # Mod
+        if werteIndex.get() == 0 and diagrammIndex.get() == 2:  # Mod
             tortendiagramm(filtered_Merkmal0)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 2:  # Fehler
+        if werteIndex.get() == 1 and diagrammIndex.get() == 2:  # Fehler
             tortendiagramm(Merkmal1)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 2:  # Lebensdauer
+        if werteIndex.get() == 2 and diagrammIndex.get() == 2:  # Lebensdauer
             tortendiagramm(filtered_Merkmal2)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 2:  # T0
+        if werteIndex.get() == 3 and diagrammIndex.get() == 2:  # T0
             tortendiagramm(filtered_Merkmal3)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 2:  # T30
-            haeufigkeitstabellen(filtered_Merkmal4)
+        if werteIndex.get() == 4 and diagrammIndex.get() == 2:  # T30
+            tortendiagramm(filtered_Merkmal4)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 2:  # Zuverl
+        if werteIndex.get() == 5 and diagrammIndex.get() == 2:  # Zuverl
             tortendiagramm(filtered_Merkmal5)
 
 
