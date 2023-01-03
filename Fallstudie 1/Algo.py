@@ -122,6 +122,7 @@ with open('Motoren.csv') as daten:
             rounded2 = round(berechnung2, 2)
             return rounded2
 
+
     # berechnet die Quantile. Erster Parameter die Liste, zweiter Parameter das gewünschte Quantil, z.B. 0.25 für das untere Quantil.
     def quantile(lst, p):
         lst = sorted(lst)
@@ -129,11 +130,12 @@ with open('Motoren.csv') as daten:
         q = p * (n - 1)
         i = int(q)
         if i == n - 1:
-            return list[i-1]
+            return list[i - 1]
         else:
-            return lst[i-1] + (q - i) * (lst[i] - lst[i-1])
+            return lst[i - 1] + (q - i) * (lst[i] - lst[i - 1])
 
-    #Berechnet den Modus, das heißt das Element das am meisten in der Spalte eines Merkmals vorkommt.
+
+    # Berechnet den Modus, das heißt das Element das am meisten in der Spalte eines Merkmals vorkommt.
     def modus(lst):
         counter = {}
         for i in lst:
@@ -150,20 +152,22 @@ with open('Motoren.csv') as daten:
             if len(counter.keys()) == 1:
                 raise ValueError('Alle Werte haben die gleiche Häufigkeit!')
 
-    #Berechnet die Spannweite in dem das kleinste Element einer liste von dem größten Element einer Liste subtrahiert wird.
+
+    # Berechnet die Spannweite in dem das kleinste Element einer liste von dem größten Element einer Liste subtrahiert wird.
     def spannweite(lst):
         berechnung = max(lst) - min(lst)
         rounded = round(berechnung, 2)
         return rounded
 
 
-    #Berechnet den Quartilsabstand indem man das erste Quartil vom dritten Quartil subtrahiert.
+    # Berechnet den Quartilsabstand indem man das erste Quartil vom dritten Quartil subtrahiert.
     def quartilsabstand(lst):
         quantil25 = quantile(lst, 0.25)
         quantil75 = quantile(lst, 0.75)
         berechnung = quantil75 - quantil25
         rounded = round(berechnung, 2)
         return rounded
+
 
     # Gibt die Streuung zurück
     def streuung(lst):
@@ -185,14 +189,16 @@ with open('Motoren.csv') as daten:
                 lists[i] = 1
         return lists
 
+
     def balkendiagramm(lst):
         counter = Counter(lst)
         keys = list(counter.keys())
         values = list(counter.values())
 
-        plt.bar(values, labels=keys)
+        plt.bar(keys, values)
         plt.title('Balkendiagramm')
         plt.show()
+
 
     def tortendiagramm(lst):
         counter = Counter(lst)
@@ -202,7 +208,6 @@ with open('Motoren.csv') as daten:
         plt.pie(values, labels=keys)
         plt.title('Tortendiagramm')
         plt.show()
-
 
 
     # Funktion, die die Kennzahlen der csv-Datei auswertet.
@@ -230,14 +235,14 @@ with open('Motoren.csv') as daten:
                         )
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 2:  # Quantile
             text.insert(END, "T0" + " 25% " + str(quantile(filtered_Merkmal3, 0.25)) + "\n" +
-                           "T0" + " 50% " + str(quantile(filtered_Merkmal3, 0.50)) + "\n" +
-                           "T0" + " 75% " + str(quantile(filtered_Merkmal3, 0.75)) + "\n"
-                           )
+                        "T0" + " 50% " + str(quantile(filtered_Merkmal3, 0.50)) + "\n" +
+                        "T0" + " 75% " + str(quantile(filtered_Merkmal3, 0.75)) + "\n"
+                        )
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 2:  # Quantile
             text.insert(END, "T30" + " 25% " + str(quantile(filtered_Merkmal2, 0.25)) + "\n" +
-                           "T30" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
-                           "T30" + " 75% " + str(quantile(filtered_Merkmal2, 0.75)) + "\n"
-                           )
+                        "T30" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
+                        "T30" + " 75% " + str(quantile(filtered_Merkmal2, 0.75)) + "\n"
+                        )
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 3:  # Modus
             text.insert(END, "Lebensdauer" + " " + str(modus(filtered_Merkmal2)))
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 3:  # Modus
@@ -265,7 +270,6 @@ with open('Motoren.csv') as daten:
             text.insert(END, "T30" + " " + str(quartilsabstand(filtered_Merkmal4))
                         )
 
-
         if stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2)) + "\n" +
                         "T0" + " " + str(streuung(filtered_Merkmal3)) + "\n" +
@@ -279,42 +283,41 @@ with open('Motoren.csv') as daten:
 
 
     def haeufigkeitstabellenerstellung():
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1: #Mod
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
             balkendiagramm(filtered_Merkmal0)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1: #Fehler
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 1:  # Fehler
             balkendiagramm(Merkmal1)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1: #Lebensdauer
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 1:  # Lebensdauer
             balkendiagramm(filtered_Merkmal2)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1: #T0
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 1:  # T0
             balkendiagramm(filtered_Merkmal3)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1: #T30
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 1:  # T30
             balkendiagramm(filtered_Merkmal4)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1: #Zuverl
-           balkendiagramm(filtered_Merkmal5)
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
+            balkendiagramm(filtered_Merkmal5)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 2: #Mod
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 2:  # Mod
             tortendiagramm(filtered_Merkmal0)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 2: #Fehler
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 2:  # Fehler
             tortendiagramm(Merkmal1)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 2: #Lebensdauer
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 2:  # Lebensdauer
             tortendiagramm(filtered_Merkmal2)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 2: #T0
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 2:  # T0
             tortendiagramm(filtered_Merkmal3)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 2: #T30
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 2:  # T30
             haeufigkeitstabellen(filtered_Merkmal4)
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 2: #Zuverl
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 2:  # Zuverl
             tortendiagramm(filtered_Merkmal5)
-
 
 
     # Button zur Erstellung der Häufigkeitstabellen und Diagramme. Ruft die Funktion dafür auf.
