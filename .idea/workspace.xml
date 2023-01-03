@@ -1,7 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="yes" />
+    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="yes">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fallstudie 1/ffff.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fallstudie 1/spam" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Motoren.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 1/Algo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 1/Algo.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -33,15 +44,19 @@
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Stelz/PycharmProjects/Entscheidungen-unter-Risiko-und-statistische-Datenanalyse/Fallstudie 1&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Stelz\PycharmProjects\Entscheidungen-unter-Risiko-und-statistische-Datenanalyse\Fallstudie 1" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Stelz\PycharmProjects\Entscheidungen-unter-Risiko-und-statistische-Datenanalyse\Fallstudie 1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Auswerter">
+  <component name="RunManager" selected="Python.Algo">
     <configuration name="Algo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Entscheidungen-unter-Risiko-und-statistische-Datenanalyse" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -49,9 +64,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="C:\Users\Stelz\PycharmProjects\Entscheidungen-unter-Risiko-und-statistische-Datenanalyse\venv\Scripts\python.exe" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 1" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 1/Algo.py" />
@@ -107,9 +122,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Auswerter" />
         <item itemvalue="Python.Algo" />
         <item itemvalue="Python.fefef" />
+        <item itemvalue="Python.Auswerter" />
       </list>
     </recent_temporary>
   </component>
@@ -150,7 +165,14 @@
       <option name="project" value="LOCAL" />
       <updated>1670638061023</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="yes">
+      <created>1670712053444</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1670712053444</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
