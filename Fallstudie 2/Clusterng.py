@@ -30,11 +30,7 @@ def teil_a():
 
     print(mittelwert)
         # hier werden die zufälligen punkte ci erzeugt
-    for i in range(k):
-        x = [random.uniform(-100, 100)]
-        y = [random.uniform(-100, 100)]
-        anfangswert = [x, y]
-        cluster.append(anfangswert)
+
 
     print(cluster)
     plt.scatter([point[0] for point in cluster], [point[1] for point in cluster])
@@ -104,7 +100,7 @@ teil_b()
 #   init="random",
 # n_clusters=ranCluster,
 #  n_init=10,
-# max_iter=300,
+# maximale_sortier_wiederholungen=300,
 # random_state=42
 # )
 

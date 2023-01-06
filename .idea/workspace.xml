@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="&#10;yes">
-      <change afterPath="$PROJECT_DIR$/Fallstudie 2/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_16_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_16_07__Changes_.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_23_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_23_40__Changes_.xml" afterDir="false" />
+    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="teil 2 aufgabe a check mit numpy">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 2/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +251,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672729717988</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="teil 2 aufgabe a check mit numpy">
+      <created>1672833407241</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1672833407241</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -272,6 +276,7 @@
     <MESSAGE value="Create asd" />
     <MESSAGE value="yes" />
     <MESSAGE value="&#10;yes" />
-    <option name="LAST_COMMIT_MESSAGE" value="&#10;yes" />
+    <MESSAGE value="teil 2 aufgabe a check mit numpy" />
+    <option name="LAST_COMMIT_MESSAGE" value="teil 2 aufgabe a check mit numpy" />
   </component>
 </project>
