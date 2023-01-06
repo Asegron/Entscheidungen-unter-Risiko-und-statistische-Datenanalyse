@@ -311,7 +311,7 @@ with open('Motoren.csv') as daten:
             text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
                         )
 
-        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 1:  # Zuverl
+        if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
             text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
                         )
 
