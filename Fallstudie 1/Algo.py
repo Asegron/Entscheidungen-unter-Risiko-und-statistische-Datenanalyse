@@ -181,7 +181,7 @@ with open('Motoren.csv') as daten:
     def standardabweichung(lst):
         return math.sqrt(streuung(lst))
 
-    def tabelle(lst):
+    def haufigkeitstabelle(lst):
 
         counter = Counter(lst)
         values = list(counter.values())
@@ -198,7 +198,7 @@ with open('Motoren.csv') as daten:
         haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
 
         table = PrettyTable()
-        table.field_names = ["Wert", "Häufigkeit", "Proportion"]
+        table.field_names = ["Ki", "Hn(ai)", "hn(ai)"]
         for keys, values, proportion in haeufigkeitstabellenliste:
             table.add_row([keys, values, proportion])
         return table
@@ -304,26 +304,26 @@ with open('Motoren.csv') as daten:
 
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
-            text.insert(END, "T0" + "\n" + str(tabelle(Merkmal0))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(Merkmal0))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
-            text.insert(END, "T0" + "\n" + str(tabelle(Merkmal1))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(Merkmal1))
                         )
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
-            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal2))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal2))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
-            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal3))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal3))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
-            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal4))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal4))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
-            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal5))
+            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal5))
                         )
 
         if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
