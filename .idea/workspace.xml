@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="teil 2 aufgabe a check mit numpy">
+    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="aufgaben teil a und b mit numoy umgesetzt">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/Clusterng.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Fallstudie 2/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -156,11 +155,11 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.test" />
-      <item itemvalue="Python.Clusterng" />
       <item itemvalue="Python.Algo" />
       <item itemvalue="Python.Auswerter" />
+      <item itemvalue="Python.Clusterng" />
       <item itemvalue="Python.fefef" />
+      <item itemvalue="Python.test" />
     </list>
     <recent_temporary>
       <list>
@@ -258,7 +257,14 @@
       <option name="project" value="LOCAL" />
       <updated>1672833407241</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="aufgaben teil a und b mit numoy umgesetzt">
+      <created>1673008718878</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673008718878</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -277,6 +283,7 @@
     <MESSAGE value="yes" />
     <MESSAGE value="&#10;yes" />
     <MESSAGE value="teil 2 aufgabe a check mit numpy" />
-    <option name="LAST_COMMIT_MESSAGE" value="teil 2 aufgabe a check mit numpy" />
+    <MESSAGE value="aufgaben teil a und b mit numoy umgesetzt" />
+    <option name="LAST_COMMIT_MESSAGE" value="aufgaben teil a und b mit numoy umgesetzt" />
   </component>
 </project>
