@@ -181,20 +181,27 @@ with open('Motoren.csv') as daten:
     def standardabweichung(lst):
         return math.sqrt(streuung(lst))
 
-
     def tabelle(lst):
+
+        counter = Counter(lst)
+        values = list(counter.values())
+        proportion = list()
+        anzahl = len(lst)
+        for i in values:
+             proportion.append(str(i)+"/"+str(anzahl))
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
                 haeufigkeitstabelle[i] += 1
             else:
                 haeufigkeitstabelle[i] = 1
+        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
+
         table = PrettyTable()
         table.field_names = ["Wert", "Häufigkeit", "Proportion"]
-        for word, frequency in haeufigkeitstabelle.items():
-            table.add_row([word, frequency])
+        for keys, values, proportion in haeufigkeitstabellenliste:
+            table.add_row([keys, values, proportion])
         return table
-
 
     def balkendiagramm(lst):
         counter = Counter(lst)
@@ -276,17 +283,24 @@ with open('Motoren.csv') as daten:
             text.insert(END, "T30" + " " + str(quartilsabstand(filtered_Merkmal4))
                         )
 
-        if stichprobenkennwerteIndex.get() == 6:  # Streuung
-            text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2)) + "\n" +
-                        "T0" + " " + str(streuung(filtered_Merkmal3)) + "\n" +
-                        "T30" + " " + str(streuung(filtered_Merkmal4))
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2))
                         )
-        if stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
-            text.insert(END, "Lebensdauer" + " " + str(standardabweichung(filtered_Merkmal2)) + "\n" +
-                        "T0" + " " + str(standardabweichung(filtered_Merkmal3)) + "\n" +
-                        "T30" + " " + str(standardabweichung(filtered_Merkmal4))
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "T0" + " " + str(streuung(filtered_Merkmal3))
                         )
-
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "T30" + " " + str(streuung(filtered_Merkmal4))
+                        )
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 7:  # Streuung
+            text.insert(END, "Lebensdauer" + " " + str(standardabweichung(filtered_Merkmal2))
+                        )
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 7:  # Streuung
+            text.insert(END, "T0" + " " + str(standardabweichung(filtered_Merkmal3))
+                        )
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 7:  # Streuung
+            text.insert(END, "T30" + " " + str(standardabweichung(filtered_Merkmal4))
+                        )
 
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
@@ -362,7 +376,7 @@ with open('Motoren.csv') as daten:
 
 
     clear_button = Button(root, text="Text löschen", command=clear).pack()
-    text = Text(root, width=40, height=10)
+    text = Text(root, width=60, height=10)
     text.pack()
 
     # Erstellt das Fenster für die Anwendung
