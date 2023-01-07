@@ -203,6 +203,36 @@ with open('Motoren.csv') as daten:
             table.add_row([keys, values, proportion])
         return table
 
+    def klassenhaufigkeitstabelle(lst):
+        messgenauigkeit = 2
+        counter = Counter(lst)
+        values = list(counter.values())
+        proportion = list()
+        anzahl = len(lst)
+        for i in values:
+             proportion.append(str(i)+"/"+str(anzahl))
+        haeufigkeitstabelle = {}
+        for i in lst:
+            if i in haeufigkeitstabelle:
+                haeufigkeitstabelle[i] += 1
+            else:
+                haeufigkeitstabelle[i] = 1
+        num_classes = (max(haeufigkeitstabelle) - min(haeufigkeitstabelle)) // messgenauigkeit + 1
+        frequencies = [0] * num_classes
+        for value in haeufigkeitstabelle:
+            class_index = (value - min(haeufigkeitstabelle)) // num_classes
+            frequencies[class_index] += 1
+        haeufigkeitstabellenliste = [(frequencies[i], keys, values, proportion[i]) for i, (keys, values) in
+                                     enumerate(haeufigkeitstabelle.items())]
+        print(frequencies)
+        table = PrettyTable()
+        table.field_names = ["Wert", "Hn(Ki)", "hn(ki)", "H(i)", "h(i)"]
+        for frequencies, keys, values, proportion in haeufigkeitstabellenliste:
+            table.add_row([keys, values, proportion])
+        return table
+
+
+
     def balkendiagramm(lst):
         counter = Counter(lst)
         keys = list(counter.keys())
@@ -324,6 +354,29 @@ with open('Motoren.csv') as daten:
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
             text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal5))
+                        )
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(Merkmal0))
+                        )
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(Merkmal1))
+                        )
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal2))
+                        )
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal3))
+                        )
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal4))
+                        )
+
+        if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal5))
                         )
 
         if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
