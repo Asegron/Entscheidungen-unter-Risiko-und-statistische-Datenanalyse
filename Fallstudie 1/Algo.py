@@ -1,11 +1,12 @@
 import csv
+import pandas as pd
+from collections import defaultdict
 from collections import Counter
 import numpy
 import statistics
 import matplotlib.pyplot as plt
 import math
 from prettytable import PrettyTable
-import pandas as pandas
 from tkinter import *
 from PIL import ImageTk, Image
 import matplotlib.pyplot as plot
@@ -181,19 +182,15 @@ with open('Motoren.csv') as daten:
         return math.sqrt(streuung(lst))
 
 
-    def haeufigkeitstabelle(lst):
+    def tabelle(lst):
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
                 haeufigkeitstabelle[i] += 1
             else:
                 haeufigkeitstabelle[i] = 1
-        return haeufigkeitstabelle
-
-
-    def haeufigkeitstabellenerstellung(haeufigkeitstabelle):
         table = PrettyTable()
-        table.field_names = ["Wert", "Häufigkeit"]
+        table.field_names = ["Wert", "Häufigkeit", "Proportion"]
         for word, frequency in haeufigkeitstabelle.items():
             table.add_row([word, frequency])
         return table
@@ -293,26 +290,26 @@ with open('Motoren.csv') as daten:
 
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(Merkmal0))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(Merkmal1))
                         )
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal2))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal3))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal4))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
-            text.insert(END, "T0" + " " + str(haeufigkeitstabellenerstellung((haeufigkeitstabelle(filtered_Merkmal0))))
+            text.insert(END, "T0" + "\n" + str(tabelle(filtered_Merkmal5))
                         )
 
         if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
@@ -365,7 +362,7 @@ with open('Motoren.csv') as daten:
 
 
     clear_button = Button(root, text="Text löschen", command=clear).pack()
-    text = Text(root, width=40, height=5)
+    text = Text(root, width=40, height=10)
     text.pack()
 
     # Erstellt das Fenster für die Anwendung
