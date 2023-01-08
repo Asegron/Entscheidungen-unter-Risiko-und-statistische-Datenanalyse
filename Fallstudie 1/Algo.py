@@ -188,7 +188,7 @@ with open('Motoren.csv') as daten:
         proportion = list()
         anzahl = len(lst)
         for i in values:
-             proportion.append(str(i)+"/"+str(anzahl))
+             proportion.append(f"{i}/{anzahl}")
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
@@ -198,39 +198,46 @@ with open('Motoren.csv') as daten:
         haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
 
         table = PrettyTable()
-        table.field_names = ["Ki", "Hn(ai)", "hn(ai)"]
+        table.field_names = ["Wert", "Hn(ai)", "hn(ai)"]
         for keys, values, proportion in haeufigkeitstabellenliste:
             table.add_row([keys, values, proportion])
         return table
 
+
+
     def klassenhaufigkeitstabelle(lst):
-        messgenauigkeit = 2
+
+        class_width = 3
         counter = Counter(lst)
         values = list(counter.values())
         proportion = list()
         anzahl = len(lst)
         for i in values:
-             proportion.append(str(i)+"/"+str(anzahl))
+             proportion.append(f"{i}/{anzahl}")
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
                 haeufigkeitstabelle[i] += 1
             else:
                 haeufigkeitstabelle[i] = 1
-        num_classes = (max(haeufigkeitstabelle) - min(haeufigkeitstabelle)) // messgenauigkeit + 1
-        frequencies = [0] * num_classes
-        for value in haeufigkeitstabelle:
-            class_index = (value - min(haeufigkeitstabelle)) // num_classes
-            frequencies[class_index] += 1
-        haeufigkeitstabellenliste = [(frequencies[i], keys, values, proportion[i]) for i, (keys, values) in
-                                     enumerate(haeufigkeitstabelle.items())]
-        print(frequencies)
-        table = PrettyTable()
-        table.field_names = ["Wert", "Hn(Ki)", "hn(ki)", "H(i)", "h(i)"]
-        for frequencies, keys, values, proportion in haeufigkeitstabellenliste:
-            table.add_row([keys, values, proportion])
-        return table
+        values2 = list(haeufigkeitstabelle.values)
+        # Anzahl der Klassen
+        num_classes = (max(values2) - min(values2)) // class_width + 1
 
+        # Häufigkeiten berechnen
+        frequencies = [0] * num_classes
+        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
+        for i, frequency in enumerate(frequencies):
+            low = min(values) + i * class_width
+            high = low + class_width - 1
+        table = PrettyTable()
+        table.field_names = ["Ki", "Hn(Ki)", "hn(Ki)", "Hn(ai)", "hn(ai)"]
+        for i, frequency in enumerate(frequencies):
+            low = min(values2) + i * class_width
+            high = low + class_width - 1
+            for keys, values, proportion in haeufigkeitstabellenliste:
+                table.add_row([low, high, keys, values, proportion])
+        return table
 
 
     def balkendiagramm(lst):
