@@ -1,93 +1,90 @@
 import random
+import math
 
 import matplotlib.pyplot as plt
 from sklearn.datasets import make_blobs
 from sklearn.cluster import KMeans
 import numpy as np
 
-
-def test():
-    # Zufällige Koordinaten generieren
-    x = [random.uniform(-100, 100) for _ in range(100)]
-    y = [random.uniform(-100, 100) for _ in range(100)]
-    # Diagramm erstellen
-    fig, ax = plt.subplots()
-    # Koordinaten plotten
-    ax.scatter(x, y)
-    # Diagramm anzeigen[
-    plt.show()
-
 cluster = []
 datenpunkte = []
 clusterx = []
 clustery = []
 
+k = random.randint(1, 10)
+
+
 
 def teil_a():
-
-
+    mittelwert = 0
     #  zufällige wahl der Clusteranzahl
-    k = random.randint(1, 10)
+    print(k)
+    i = 0
+    z=0
+    for x in range(k):
+        x= x+1
+        z =z+x
+        print(z)
 
-    # hier werden die zufälligen punkte ci erzeugt
-    for i in range(k):
-        x = [random.uniform(-100, 100)]
-        y = [random.uniform(-100, 100)]
-        anfangswert = [x, y]
-        cluster.append(anfangswert)
+    mittelwert= z/k
 
-    clusterx = [point[0] for point in cluster ]
-    clustery = [point[1] for point in cluster]
-    plt.scatter(clusterx,clustery)
+    print(mittelwert)
+        # hier werden die zufälligen punkte ci erzeugt
+
+
+    print(cluster)
+    plt.scatter([point[0] for point in cluster], [point[1] for point in cluster])
     plt.show()
 
-    for i in cluster:
-        datenpunkte_add(k)
+    schleifen_objekt = iter(cluster)
 
-    datenx = [point[0] for point in datenpunkte]
-    dateny = [point[1] for point in datenpunkte]
-    plt.scatter(datenx,dateny)
-    plt.show()
+    while True:
+
+        try:
+            naechster_wert = next(schleifen_objekt)
+        except StopIteration:
+            break
+
+        else:
+            for i in range(10):
+                sigma = random.uniform(1, 3)  # zufälligen Standardabweichung(sigma = 1, … , 3)
+                x = [random.normalvariate(mittelwert,sigma)]
+                y = [random.normalvariate(mittelwert,sigma)]
+                datenwert = [x, y]
+                datenpunkte.append(datenwert)
+
+        print(datenpunkte)
+        print('for fertig ')
 
     print(datenpunkte)
+    plt.scatter([point[0] for point in datenpunkte], [point[1] for point in datenpunkte])
+    plt.show()
 
 
-def datenpunkte_add(k):
-    print("hier")
-    sigma = random.uniform(1, 3)
-    ci = k
-    for i in range(100):
-        einerAusHundert = random.normalvariate(ci, sigma)
-        einerAusHundert2 = random.normalvariate(ci, sigma)
-        wert = [einerAusHundert, einerAusHundert2]
-        datenpunkte.append(wert)
 
 
-teil_a()
+
 
 
 def teil_b():
-    print("Wie viele Cluster soll es im K-MEAN ALGO geben ? ")
-    anzahlCluster = int(input("Anzahl:"))
-    print("Wie viele Daten soll es im K-MEAN ALGO geben ? ")
-    anzahlDaten = int(input("Anzahl:"))
-    data = []
-    mittelwerte = []
+    mittelpunkte= []
+    for i in range(k):
+        auswahl = random.randint(1,len(datenpunkte)-1)
+        mittelpunkte.append(datenpunkte[auswahl])
 
-    for i in range(anzahlDaten):
-        zahl = random.randint(-30000, 30000)
-        zahl2 = random.randint(-30000, 30000)
-        y = [zahl, zahl2]
-        data.append(y)
+    print("-----------------------------------------")
+    print(mittelpunkte)
 
-    plt.plot(data, "x")
-    plt.show()
-    plt.plot(mittelwerte, 'x')
-    plt.show()
+    abstand(mittelpunkte[0],mittelpunkte[1])
 
-# test()
 
-# teil_b()
+def abstand (x, y):
+        return math.sqrt(sum([(a - b) ** 2 for a, b in zip(x, y)]))
+
+
+
+teil_a()
+teil_b()
 #
 # deviation = np.random.uniform(1, 3)
 
@@ -103,7 +100,7 @@ def teil_b():
 #   init="random",
 # n_clusters=ranCluster,
 #  n_init=10,
-# max_iter=300,
+# maximale_sortier_wiederholungen=300,
 # random_state=42
 # )
 
