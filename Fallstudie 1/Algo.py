@@ -215,20 +215,17 @@ with open('Motoren.csv') as daten:
             table.add_row([keys, values, proportion])
         return table
 
-
+    
     def klassenhaufigkeitstabelle(lst, messgenauigkeit):
         daten_halter = list(map(float, lst))
 
         daten_halter.sort()
         anzahl_klassen = int(round(math.sqrt(len(daten_halter) - 1), 0))
 
-        # Divide the data into 10 bins using the numpy histogram function
+        # Teilt die Daten in Punkte(Betrag=Anzahl der Klassen)
         hist, edges = np.histogram(lst, bins=anzahl_klassen)
 
-        # Print the frequency table
-        for i in range(len(hist)):
-            print("Bin", i + 1, ":", hist[i], "data points")
-
+        #Überführt die Daten aus hist und edges in das Array table zum Ausgeben
         table = [(left, right, count) for left, right, count in zip(edges[:-1], edges[1:], hist)]
 
         # Erstelle eine Pandas-Datenframe aus der Liste
