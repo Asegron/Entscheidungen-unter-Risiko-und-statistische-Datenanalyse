@@ -82,6 +82,7 @@ with open('Motoren.csv') as daten:
                                    value=index, padx=25)
         radiobutton4.pack(anchor=W)
 
+    #Löscht den Header für die Tabellen.
     del Merkmal0[0]
     del Merkmal1[0]
     del Merkmal2[0]
@@ -182,6 +183,7 @@ with open('Motoren.csv') as daten:
         return math.sqrt(streuung(lst))
 
 
+    #Erstellt eine Häufigkeitstabelle einer Liste durch die Methode PrettyTable().
     def haufigkeitstabelle(lst):
 
         counter = Counter(lst)
@@ -206,6 +208,7 @@ with open('Motoren.csv') as daten:
         return table
 
 
+    # Erstellt eine Klassenhäufigkeitstabelle und fügt die Werte einer Liste hinzu
     def klassenhaufigkeitstabelle(lst):
         messgenauigkeit = 1
         daten_halter = list(map(float, lst))
@@ -236,8 +239,8 @@ with open('Motoren.csv') as daten:
         for i in range(len(datenklassen)):
             for x in range(len(daten_halter)):
 
-                if (daten_halter[x] >= datenklassen[i]):
-                    if (daten_halter[x] < datenklassen[i + 1]):
+                if daten_halter[x] >= datenklassen[i]:
+                    if daten_halter[x] < datenklassen[i + 1]:
                         zähler = zähler + 1
 
 
@@ -246,7 +249,7 @@ with open('Motoren.csv') as daten:
         df = pd.DataFrame({'Klassen': datenklassen, 'Häufigkeit': vorkomnisse})
         return df
 
-
+    #Erstellt eine Klassenhäufigkeitstabelle und fügt die Werte einer Liste hinzu
     def klassenhaufigkeitstabelle2(lst):
 
         class_width = 3
@@ -282,7 +285,7 @@ with open('Motoren.csv') as daten:
                 table.add_row([low, high, keys, values, proportion])
         return table
 
-
+    #Erstellt ein Balkendiagramm aus den Keys und Values einer Liste
     def balkendiagramm(lst):
         counter = Counter(lst)
         keys = list(counter.keys())
@@ -292,7 +295,7 @@ with open('Motoren.csv') as daten:
         plt.title('Balkendiagramm')
         plt.show()
 
-
+    #Erstellt ein Tortendiagramm aus den Keys und Values einer Liste
     def tortendiagramm(lst):
         counter = Counter(lst)
         keys = list(counter.keys())
@@ -304,7 +307,7 @@ with open('Motoren.csv') as daten:
 
 
     # Funktion, die die Kennzahlen der csv-Datei auswertet.
-    # Logische Auswahl der Indices läuft über die Radiobuttons das die jeweilige Kennzahl auswählt.
+    # Berechnet durch das Klicken von (Radio-)Buttons die entsprechenden Kennwerte.
     def kennwertberechnung():
 
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
@@ -382,7 +385,7 @@ with open('Motoren.csv') as daten:
             text.insert(END, "T30" + " " + str(standardabweichung(filtered_Merkmal4))
                         )
 
-
+    #Erstellt durch das Klicken von (Radio-)Buttons Tabellen oder Diagramme.
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
             text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(Merkmal0))
