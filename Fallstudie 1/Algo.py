@@ -1,4 +1,6 @@
 import csv
+from tabulate import tabulate
+import numpy as np
 import pandas as pd
 from collections import defaultdict
 from collections import Counter
@@ -207,43 +209,30 @@ with open('Motoren.csv') as daten:
 
 
     def klassenhaufigkeitstabelle(lst):
+
         messgenauigkeit = 1
         daten_halter = list(map(float, lst))
 
         daten_halter.sort()
-        anzahl_klassen = int(round(math.sqrt(len(daten_halter)-1),0))
+        anzahl_klassen = int(round(math.sqrt(len(daten_halter) - 1), 0))
 
+        # Divide the data into 10 bins using the numpy histogram function
+        hist, edges = np.histogram(lst, bins=anzahl_klassen)
+        print(edges)
+        die_Behinderten_Klassen = []
+        print(hist)
 
-        klassenbreite = ((daten_halter[len(daten_halter)-1]+ messgenauigkeit/2)-(daten_halter[0]- messgenauigkeit/2))/anzahl_klassen
-        print(klassenbreite)
+        # Print the frequency table
+        for i in range(len(hist)):
+            print("Bin", i + 1, ":", hist[i], "data points")
 
-        datenklassen = []
-        x = 0
-        for i in range(anzahl_klassen-1):
-            datenklassen.append(daten_halter[x])
-            x = x+anzahl_klassen
-            print(datenklassen)
-        datenklassen.append(daten_halter[len(daten_halter)-1])
+        # Erstelle die Tabelle als Liste von Tupeln
+        table = [(left, right, count) for left, right, count in zip(edges[:-1], edges[1:], hist)]
 
+        # Erstelle eine Pandas-Datenframe aus der Liste
+        df = pd.DataFrame(table, columns=['Untere Schranke', 'Obere Schranke', 'Häufigkeit'])
 
-        vorkomnisse = []
-        zähler = 0
-        print(datenklassen)
-        print(daten_halter)
-
-
-
-        for i in range(len(datenklassen)):
-            for x in range(len(daten_halter)):
-
-                if (daten_halter[x] >= datenklassen[i]):
-                    if (daten_halter[x] < datenklassen[i + 1]):
-                        zähler = zähler + 1
-
-
-            vorkomnisse.append(zähler)
-            zähler=0
-        df = pd.DataFrame({'Klassen': datenklassen, 'Häufigkeit': vorkomnisse})
+        # Anzeige der Tabelle
         return df
 
 

@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="klassenhäufigkeit aufgabe 1" />
+    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="klassenhäufigkeit aufgabe 1">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 1/Algo.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 1/Algo.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -208,7 +211,14 @@
       <option name="project" value="LOCAL" />
       <updated>1673197578697</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="klassenhäufigkeit aufgabe 1">
+      <created>1673197742570</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1673197742570</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
