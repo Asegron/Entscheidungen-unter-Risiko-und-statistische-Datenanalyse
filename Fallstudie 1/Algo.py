@@ -175,12 +175,12 @@ with open('Motoren.csv') as daten:
     # Gibt die Streuung zurück
     def streuung(lst):
         formel = sum([(x - average(lst)) ** 2 for x in lst]) / len(lst)
-        return formel
+        return round(formel, 4)
 
 
     # Gibt die Standardabweichung zurück in dem aus der Streuung die Wurzel gezogen wird.
     def standardabweichung(lst):
-        return math.sqrt(streuung(lst))
+        return round(math.sqrt(streuung(lst)), 4)
 
 
     #Erstellt eine Häufigkeitstabelle einer Liste durch die Methode PrettyTable().
@@ -310,20 +310,40 @@ with open('Motoren.csv') as daten:
     # Berechnet durch das Klicken von (Radio-)Buttons die entsprechenden Kennwerte.
     def kennwertberechnung():
 
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "MOD" + " " + str(average(filtered_Merkmal0)))
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "Fehler" + " kein Mittelwert möglich da Buchstaben")
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
             text.insert(END, "Lebensdauer" + " " + str(average(filtered_Merkmal2)))
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
             text.insert(END, "T0" + " " + str(average(filtered_Merkmal3)))
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
             text.insert(END, "T30" + " " + str(average(filtered_Merkmal4)))
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 0:  # Mittelwert
+            text.insert(END, "Zuverl" + " " + str(average(filtered_Merkmal5)))
 
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "MOD" + " " + str(median(filtered_Merkmal0)))
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "Fehler" + " kein Median möglich da die Werte aus Buchstaben bestehen.")
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 1:  # Median
             text.insert(END, "Lebensdauer" + " " + str(median(filtered_Merkmal2)))
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 1:  # Median
             text.insert(END, "T0" + " " + str(median(filtered_Merkmal3)))
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 1:  # Median
             text.insert(END, "T30" + " " + str(median(filtered_Merkmal4)))
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 1:  # Median
+            text.insert(END, "Zuverl" + " " + str(median(filtered_Merkmal5)))
 
+
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal0, 0.25)) + "\n" +
+                        "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal0, 0.50)) + "\n" +
+                        "Lebensdauer" + " 75% " + str(quantile(filtered_Merkmal0, 0.75)) + "\n"
+                        )
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "Fehler" + " keine Quantile möglich da die Werte aus Buchstaben bestehen.")
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 2:  # Quantile
             text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal2, 0.25)) + "\n" +
                         "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
@@ -335,27 +355,53 @@ with open('Motoren.csv') as daten:
                         "T0" + " 75% " + str(quantile(filtered_Merkmal3, 0.75)) + "\n"
                         )
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 2:  # Quantile
-            text.insert(END, "T30" + " 25% " + str(quantile(filtered_Merkmal2, 0.25)) + "\n" +
-                        "T30" + " 50% " + str(quantile(filtered_Merkmal2, 0.50)) + "\n" +
-                        "T30" + " 75% " + str(quantile(filtered_Merkmal2, 0.75)) + "\n"
+            text.insert(END, "T30" + " 25% " + str(quantile(filtered_Merkmal4, 0.25)) + "\n" +
+                        "T30" + " 50% " + str(quantile(filtered_Merkmal4, 0.50)) + "\n" +
+                        "T30" + " 75% " + str(quantile(filtered_Merkmal4, 0.75)) + "\n"
                         )
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 2:  # Quantile
+            text.insert(END, "Zuverl" + " 25% " + str(quantile(filtered_Merkmal5, 0.25)) + "\n" +
+                        "Zuverl" + " 50% " + str(quantile(filtered_Merkmal5, 0.50)) + "\n" +
+                        "Zuverl" + " 75% " + str(quantile(filtered_Merkmal5, 0.75)) + "\n"
+                        )
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "MOD" + " " + str(modus(filtered_Merkmal0)))
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "Fehler" + " " + str(modus(Merkmal1)))
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 3:  # Modus
             text.insert(END, "Lebensdauer" + " " + str(modus(filtered_Merkmal2)))
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 3:  # Modus
             text.insert(END, "T0" + " " + str(modus(filtered_Merkmal3)))
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 3:  # Modus
             text.insert(END, "T30" + " " + str(modus(filtered_Merkmal4)))
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 3:  # Modus
+            text.insert(END, "Zuverl" + " " + str(modus(filtered_Merkmal5)))
 
-        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
+            text.insert(END, "MOD" + " " + str(spannweite(filtered_Merkmal0))
+                        )
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
+            text.insert(END, "Spannweite nicht möglich da die Werte aus Buchstaben bestehen."
+                        )
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
             text.insert(END, "Lebensdauer" + " " + str(spannweite(filtered_Merkmal2))
                         )
-        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
             text.insert(END, "T0" + " " + str(spannweite(filtered_Merkmal3))
                         )
-        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 4:  # Quartilsabstand
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
             text.insert(END, "T30" + " " + str(spannweite(filtered_Merkmal4))
                         )
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 4:  # Spannweite
+            text.insert(END, "Zuverl" + " " + str(spannweite(filtered_Merkmal5))
+                        )
 
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "MOD" + " " + str(quartilsabstand(filtered_Merkmal0))
+                        )
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "Quartilsabstand nicht möglich da die Werte aus Buchstaben bestehen."
+                        )
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
             text.insert(END, "Lebensdauer" + " " + str(quartilsabstand(filtered_Merkmal2))
                         )
@@ -365,7 +411,17 @@ with open('Motoren.csv') as daten:
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
             text.insert(END, "T30" + " " + str(quartilsabstand(filtered_Merkmal4))
                         )
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 5:  # Quartilsabstand
+            text.insert(END, "Zuverl" + " " + str(quartilsabstand(filtered_Merkmal5))
+                        )
 
+
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "MOD" + " " + str(streuung(filtered_Merkmal0))
+                        )
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "Streuung nicht möglich da die Werte aus Buchstaben bestehen."
+                        )
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2))
                         )
@@ -375,14 +431,28 @@ with open('Motoren.csv') as daten:
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "T30" + " " + str(streuung(filtered_Merkmal4))
                         )
-        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 7:  # Streuung
-            text.insert(END, "Lebensdauer" + " " + str(standardabweichung(filtered_Merkmal2))
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 6:  # Streuung
+            text.insert(END, "Zuverl" + " " + str(streuung(filtered_Merkmal5))
                         )
-        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 7:  # Streuung
+
+
+        if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
+            text.insert(END, "MOD" + " " + str(standardabweichung(filtered_Merkmal2))
+                        )
+        if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
+            text.insert(END, "Standardabweichung nicht möglich da die Werte aus Buchstaben bestehen."
+                        )
+        if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
+            text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2))
+                        )
+        if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
             text.insert(END, "T0" + " " + str(standardabweichung(filtered_Merkmal3))
                         )
-        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 7:  # Streuung
+        if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
             text.insert(END, "T30" + " " + str(standardabweichung(filtered_Merkmal4))
+                        )
+        if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
+            text.insert(END, "Zuverl" + " " + str(standardabweichung(filtered_Merkmal2))
                         )
 
     #Erstellt durch das Klicken von (Radio-)Buttons Tabellen oder Diagramme.
