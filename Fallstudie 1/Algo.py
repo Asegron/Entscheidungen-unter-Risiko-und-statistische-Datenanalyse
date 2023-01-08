@@ -47,11 +47,13 @@ with open('Motoren.csv') as daten:
 
     messgenauigkeitBox = Text(root, height=1, width=5)
     messgenauigkeitBox.pack()
-
+    messgenauigkeit = IntVar()
 
     def retrieve_input():
-        inputValue = messgenauigkeitBox.get("1.0", "end-1c")
-
+        messgenauigkeitVar1= messgenauigkeitBox.get("1.0", "end-1c")
+        messgenauigkeitVar2= [int(x) for x in messgenauigkeitVar1]
+        messgenauigkeit = messgenauigkeitVar2[0]
+        return messgenauigkeit
 
     buttonCommit = Button(root, height=1, width=5, text="Einlesen",
                           command=lambda: retrieve_input())
@@ -214,8 +216,7 @@ with open('Motoren.csv') as daten:
         return table
 
 
-    def klassenhaufigkeitstabelle(lst):
-        messgenauigkeit = 1
+    def klassenhaufigkeitstabelle(lst, messgenauigkeit):
         daten_halter = list(map(float, lst))
 
         daten_halter.sort()
@@ -223,9 +224,6 @@ with open('Motoren.csv') as daten:
 
         # Divide the data into 10 bins using the numpy histogram function
         hist, edges = np.histogram(lst, bins=anzahl_klassen)
-        print(edges)
-        die_Behinderten_Klassen = []
-        print(hist)
 
         # Print the frequency table
         for i in range(len(hist)):
@@ -237,7 +235,6 @@ with open('Motoren.csv') as daten:
         df = pd.DataFrame(table, columns=['Untere Schranke', 'Obere Schranke', 'Häufigkeit'])
         # Anzeige der Tabelle
         return df
-
 
     def balkendiagramm(lst):
         counter = Counter(lst)
@@ -290,9 +287,9 @@ with open('Motoren.csv') as daten:
             text.insert(END, "Zuverl" + " " + str(median(filtered_Merkmal5)))
 
         if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 2:  # Quantile
-            text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal0, 0.25)) + "\n" +
-                        "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal0, 0.50)) + "\n" +
-                        "Lebensdauer" + " 75% " + str(quantile(filtered_Merkmal0, 0.75)) + "\n"
+            text.insert(END, "MOD" + " 25% " + str(quantile(filtered_Merkmal0, 0.25)) + "\n" +
+                        "MOD" + " 50% " + str(quantile(filtered_Merkmal0, 0.50)) + "\n" +
+                        "MOD" + " 75% " + str(quantile(filtered_Merkmal0, 0.75)) + "\n"
                         )
         if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 2:  # Quantile
             text.insert(END, "Fehler" + " keine Quantile möglich da die Werte aus Buchstaben bestehen.")
@@ -387,13 +384,13 @@ with open('Motoren.csv') as daten:
                         )
 
         if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
-            text.insert(END, "MOD" + " " + str(standardabweichung(filtered_Merkmal2))
+            text.insert(END, "MOD" + " " + str(standardabweichung(filtered_Merkmal0))
                         )
         if werteIndex.get() == 1 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
             text.insert(END, "Standardabweichung nicht möglich da die Werte aus Buchstaben bestehen."
                         )
         if werteIndex.get() == 2 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
-            text.insert(END, "Lebensdauer" + " " + str(streuung(filtered_Merkmal2))
+            text.insert(END, "Lebensdauer" + " " + str(standardabweichung(filtered_Merkmal2))
                         )
         if werteIndex.get() == 3 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
             text.insert(END, "T0" + " " + str(standardabweichung(filtered_Merkmal3))
@@ -402,7 +399,7 @@ with open('Motoren.csv') as daten:
             text.insert(END, "T30" + " " + str(standardabweichung(filtered_Merkmal4))
                         )
         if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
-            text.insert(END, "Zuverl" + " " + str(standardabweichung(filtered_Merkmal2))
+            text.insert(END, "Zuverl" + " " + str(standardabweichung(filtered_Merkmal5))
                         )
 
 
@@ -432,26 +429,26 @@ with open('Motoren.csv') as daten:
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
-            text.insert(END, "MOD" + "\n" + str(klassenhaufigkeitstabelle(Merkmal0))
+            text.insert(END, "MOD" + "\n" + str(klassenhaufigkeitstabelle(Merkmal0, messgenauigkeit))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
             text.insert(END, "Fehler" + " geht nicht da es sich bei den Werten um Buchstaben handelt aus denen man keine Schranken bilden kann."
                         )
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
-            text.insert(END, "Lebensdauer" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal2))
+            text.insert(END, "Lebensdauer" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal2, messgenauigkeit))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal3))
+            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal3, messgenauigkeit))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
-            text.insert(END, "T30" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal4))
+            text.insert(END, "T30" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal4, messgenauigkeit))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
-            text.insert(END, "Zuverl" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal5))
+            text.insert(END, "Zuverl" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal5, messgenauigkeit))
                         )
 
         if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
@@ -504,7 +501,7 @@ with open('Motoren.csv') as daten:
 
 
     clear_button = Button(root, text="Text löschen", command=clear).pack()
-    text = Text(root, width=60, height=10)
+    text = Text(root, width=50, height=10)
     text.pack()
 
     # Erstellt das Fenster für die Anwendung
