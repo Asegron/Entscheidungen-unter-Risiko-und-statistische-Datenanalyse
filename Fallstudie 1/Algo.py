@@ -181,6 +181,7 @@ with open('Motoren.csv') as daten:
     def standardabweichung(lst):
         return math.sqrt(streuung(lst))
 
+
     def haufigkeitstabelle(lst):
 
         counter = Counter(lst)
@@ -188,14 +189,15 @@ with open('Motoren.csv') as daten:
         proportion = list()
         anzahl = len(lst)
         for i in values:
-             proportion.append(f"{i}/{anzahl}")
+            proportion.append(f"{i}/{anzahl}")
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
                 haeufigkeitstabelle[i] += 1
             else:
                 haeufigkeitstabelle[i] = 1
-        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
+        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in
+                                     enumerate(haeufigkeitstabelle.items())]
 
         table = PrettyTable()
         table.field_names = ["Wert", "Hn(ai)", "hn(ai)"]
@@ -204,8 +206,48 @@ with open('Motoren.csv') as daten:
         return table
 
 
-
     def klassenhaufigkeitstabelle(lst):
+        messgenauigkeit = 1
+        daten_halter = list(map(float, lst))
+
+        daten_halter.sort()
+        anzahl_klassen = int(round(math.sqrt(len(daten_halter)-1),0))
+
+
+        klassenbreite = ((daten_halter[len(daten_halter)-1]+ messgenauigkeit/2)-(daten_halter[0]- messgenauigkeit/2))/anzahl_klassen
+        print(klassenbreite)
+
+        datenklassen = []
+        x = 0
+        for i in range(anzahl_klassen-1):
+            datenklassen.append(daten_halter[x])
+            x = x+anzahl_klassen
+            print(datenklassen)
+        datenklassen.append(daten_halter[len(daten_halter)-1])
+
+
+        vorkomnisse = []
+        zähler = 0
+        print(datenklassen)
+        print(daten_halter)
+
+
+
+        for i in range(len(datenklassen)):
+            for x in range(len(daten_halter)):
+
+                if (daten_halter[x] >= datenklassen[i]):
+                    if (daten_halter[x] < datenklassen[i + 1]):
+                        zähler = zähler + 1
+
+
+            vorkomnisse.append(zähler)
+            zähler=0
+        df = pd.DataFrame({'Klassen': datenklassen, 'Häufigkeit': vorkomnisse})
+        return df
+
+
+    def klassenhaufigkeitstabelle2(lst):
 
         class_width = 3
         counter = Counter(lst)
@@ -213,7 +255,7 @@ with open('Motoren.csv') as daten:
         proportion = list()
         anzahl = len(lst)
         for i in values:
-             proportion.append(f"{i}/{anzahl}")
+            proportion.append(f"{i}/{anzahl}")
         haeufigkeitstabelle = {}
         for i in lst:
             if i in haeufigkeitstabelle:
@@ -226,7 +268,8 @@ with open('Motoren.csv') as daten:
 
         # Häufigkeiten berechnen
         frequencies = [0] * num_classes
-        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in enumerate(haeufigkeitstabelle.items())]
+        haeufigkeitstabellenliste = [(keys, values, proportion[i]) for i, (keys, values) in
+                                     enumerate(haeufigkeitstabelle.items())]
         for i, frequency in enumerate(frequencies):
             low = min(values) + i * class_width
             high = low + class_width - 1
@@ -338,6 +381,7 @@ with open('Motoren.csv') as daten:
         if werteIndex.get() == 4 and stichprobenkennwerteIndex.get() == 7:  # Streuung
             text.insert(END, "T30" + " " + str(standardabweichung(filtered_Merkmal4))
                         )
+
 
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
