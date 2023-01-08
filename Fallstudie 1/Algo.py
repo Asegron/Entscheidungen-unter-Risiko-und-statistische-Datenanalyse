@@ -2,17 +2,11 @@ import csv
 
 import numpy as np
 import pandas as pd
-from collections import defaultdict
 from collections import Counter
-import numpy
-import statistics
 import matplotlib.pyplot as plt
 import math
 from prettytable import PrettyTable
 from tkinter import *
-from PIL import ImageTk, Image
-import matplotlib.pyplot as plot
-from numpy import mean, var
 
 MerkmalReihe = 0  # um Merkmale aus der csv zu extrahieren
 MerkmalNamenListe = list()  # Liste in der die Merkmalnamen gespeichert werden
@@ -50,13 +44,17 @@ with open('Motoren.csv') as daten:
     # Erstellt Fenster mit Titel
     root = Tk()
     root.title('Statistische Auswertungen')
-    
+
     messgenauigkeitBox = Text(root, height=1, width=5)
     messgenauigkeitBox.pack()
+
+
     def retrieve_input():
         inputValue = messgenauigkeitBox.get("1.0", "end-1c")
-    buttonCommit=Button(root, height=1, width=5, text="Einlesen",
-                        command=lambda: retrieve_input())
+
+
+    buttonCommit = Button(root, height=1, width=5, text="Einlesen",
+                          command=lambda: retrieve_input())
     buttonCommit.pack()
 
     # Variabeln zum Aufruf der verschiedenen Auswahlmöglichkeiten
@@ -291,7 +289,6 @@ with open('Motoren.csv') as daten:
         if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 1:  # Median
             text.insert(END, "Zuverl" + " " + str(median(filtered_Merkmal5)))
 
-
         if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 2:  # Quantile
             text.insert(END, "Lebensdauer" + " 25% " + str(quantile(filtered_Merkmal0, 0.25)) + "\n" +
                         "Lebensdauer" + " 50% " + str(quantile(filtered_Merkmal0, 0.50)) + "\n" +
@@ -370,7 +367,6 @@ with open('Motoren.csv') as daten:
             text.insert(END, "Zuverl" + " " + str(quartilsabstand(filtered_Merkmal5))
                         )
 
-
         if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "MOD" + " " + str(streuung(filtered_Merkmal0))
                         )
@@ -389,7 +385,6 @@ with open('Motoren.csv') as daten:
         if werteIndex.get() == 5 and stichprobenkennwerteIndex.get() == 6:  # Streuung
             text.insert(END, "Zuverl" + " " + str(streuung(filtered_Merkmal5))
                         )
-
 
         if werteIndex.get() == 0 and stichprobenkennwerteIndex.get() == 7:  # Standardabweichung
             text.insert(END, "MOD" + " " + str(standardabweichung(filtered_Merkmal2))
@@ -410,17 +405,18 @@ with open('Motoren.csv') as daten:
             text.insert(END, "Zuverl" + " " + str(standardabweichung(filtered_Merkmal2))
                         )
 
-    #Erstellt durch das Klicken von (Radio-)Buttons Tabellen oder Diagramme.
+
+    # Erstellt durch das Klicken von (Radio-)Buttons Tabellen oder Diagramme.
     def haeufigkeitstabellenerstellung():
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
-            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(Merkmal0))
+            text.insert(END, "MOD" + "\n" + str(haufigkeitstabelle(Merkmal0))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
-            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(Merkmal1))
+            text.insert(END, "Fehler" + "\n" + str(haufigkeitstabelle(Merkmal1))
                         )
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
-            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal2))
+            text.insert(END, "Lebensdauer" + "\n" + str(haufigkeitstabelle(filtered_Merkmal2))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
@@ -428,22 +424,22 @@ with open('Motoren.csv') as daten:
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
-            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal4))
+            text.insert(END, "T30" + "\n" + str(haufigkeitstabelle(filtered_Merkmal4))
                         )
 
         if haeufigkeitsIndex.get() == 0 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
-            text.insert(END, "T0" + "\n" + str(haufigkeitstabelle(filtered_Merkmal5))
+            text.insert(END, "Zuverl" + "\n" + str(haufigkeitstabelle(filtered_Merkmal5))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 0 and diagrammIndex.get() == 0:  # Mod
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(Merkmal0))
+            text.insert(END, "MOD" + "\n" + str(klassenhaufigkeitstabelle(Merkmal0))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 1 and diagrammIndex.get() == 0:  # Fehler
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(Merkmal1))
+            text.insert(END, "Fehler" + " geht nicht da es sich bei den Werten um Buchstaben handelt aus denen man keine Schranken bilden kann."
                         )
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 2 and diagrammIndex.get() == 0:  # Lebensdauer
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal2))
+            text.insert(END, "Lebensdauer" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal2))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 3 and diagrammIndex.get() == 0:  # T0
@@ -451,11 +447,11 @@ with open('Motoren.csv') as daten:
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 4 and diagrammIndex.get() == 0:  # T30
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal4))
+            text.insert(END, "T30" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal4))
                         )
 
         if haeufigkeitsIndex.get() == 1 and werteIndex.get() == 5 and diagrammIndex.get() == 0:  # Zuverl
-            text.insert(END, "T0" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal5))
+            text.insert(END, "Zuverl" + "\n" + str(klassenhaufigkeitstabelle(filtered_Merkmal5))
                         )
 
         if werteIndex.get() == 0 and diagrammIndex.get() == 1:  # Mod
@@ -510,8 +506,6 @@ with open('Motoren.csv') as daten:
     clear_button = Button(root, text="Text löschen", command=clear).pack()
     text = Text(root, width=60, height=10)
     text.pack()
-
-
 
     # Erstellt das Fenster für die Anwendung
     Canvas(root, width=200, height=50).pack()
