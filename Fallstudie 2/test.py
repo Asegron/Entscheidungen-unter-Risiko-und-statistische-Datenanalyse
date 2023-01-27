@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 clusters = []
 data = []
 # Anzahl der Cluster
-k = random.randint(1, 11)
+k = random.randint(1, 10)
 
 
 # Legt die Ausganspunkte der k Cluster an welche dann als Mittelwert dienen
@@ -41,9 +41,11 @@ def a_schritt2():
 
 
 def k_means():
-    global k
-
-    data_kmeans = data
+    global k, data
+    # array wird kopiert um daten bei zu behalten und dabei standartiesiert
+    data_kmeans =  (data - np.mean(data)) / np.std(data)
+    print("Standatiesierte Daten ")
+    print(data_kmeans)
     # Maximale wiederholungen des verfahrens
     maximale_sortier_wiederholungen = 100
     # Anzahl der Cluster ist aktuell einf wert von k
@@ -95,7 +97,7 @@ def k_means_plus2():
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
 
-    mittelpunkt_cluster = kmeans_plus_plus(data_kmeans,k)
+    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
 
     for i in range(maximale_sortier_wiederholungen):
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
@@ -129,28 +131,7 @@ def k_means_plus2():
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
     plt.show()
 
-
-def kmeans_plus_plus(X, k):
-    # Initialize the first centroid randomly
-    centroids = [X[np.random.randint(X.shape[0])]]
-
-    # Initialize an array to store the distances from each point to the nearest centroid
-    distances = np.zeros(X.shape[0])
-
-    # Iterate over the remaining centroids
-    for _ in range(k - 1):
-        # Calculate the distances from each point to the nearest centroid
-        for i, x in enumerate(X):
-            distances[i] = min([np.linalg.norm(x - c) for c in centroids]) ** 2
-
-        # Normalize the distances
-        distances /= np.sum(distances)
-
-        # Choose the next centroid based on the probabilities in the distance array
-        centroids.append(X[np.random.choice(X.shape[0], p=distances)])
-
-    return centroids
-# -------------------------------------------------------------------Symbolische MAin area für die aufrufe ________________________________________________________________________________
+    #------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
 a_schritt1()
 a_schritt2()
@@ -160,4 +141,4 @@ print(clusters)
 print("Data points:")
 print(data)
 k_means()
-k_means_plus2()
+#k_means_plus2()
