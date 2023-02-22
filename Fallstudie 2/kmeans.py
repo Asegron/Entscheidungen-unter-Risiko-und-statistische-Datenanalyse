@@ -86,50 +86,6 @@ def k_means():
     plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
     plt.show()
-def k_means_plus2():
-    global k
-
-    data_kmeans = data
-    # Maximale wiederholungen des verfahrens
-    maximale_sortier_wiederholungen = 100
-    # Anzahl der Cluster ist aktuell einf wert von k
-    k = k
-
-    # zufällige wahl der  ersten cluster mittelpunkte in data[]
-
-    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
-
-    for i in range(maximale_sortier_wiederholungen):
-        # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
-        # (Wurzel ziehen (np.sum gibt die summer der 2 quadrierten subtraktionen zurück ))
-        # form : [[distanz1 zu mitte1, distanz1 zu mitte2 ......... ]
-        #        [distanz1 zu mitte1, distanz1 zu mitte2.........]]
-        # -1 ist die dimension
-        distances = np.sqrt(np.sum((data_kmeans[:, np.newaxis] - mittelpunkt_cluster) ** 2, axis=-1))
-
-        # weist jeden punkt dem cluster zu dem er die niedrigste distanz hat
-        # in dem er in der dimesnsion -1 für jeden wert prüdft wo der kleinste wert steht
-        labels = np.argmin(distances, axis=-1)
-
-        #  berechnet für jedes "label"(teilcluster) auf basis der zugeordneten wert den neuen mittelwert
-        mittelpunkte_neu = np.array([data_kmeans[labels == i].mean(axis=0) for i in range(k)])
-
-        # prüft ob die cluster sich geändert haben :
-        # cas 1: ja dann geht die iteration weiter
-        # case2: nein das break bricht die for schleife ab und plottet die cluster
-
-        if np.allclose(mittelpunkt_cluster, mittelpunkte_neu):
-            break  # wenn sich die zuordnungen nicht mehr ändern wird das programm beendet
-
-        mittelpunkt_cluster = mittelpunkte_neu
-        plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
-        plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
-        plt.show()
-
-    # Plot the data
-    plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
-    plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
-    plt.show()
 
     #------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
@@ -141,4 +97,4 @@ print(clusters)
 print("Data points:")
 print(data)
 k_means()
-#k_means_plus2()
+
