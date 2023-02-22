@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="standartisieriung">
-      <change afterPath="$PROJECT_DIR$/Fallstudie 2/kmeans++.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Fallstudie 2/kmeans.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_16_07__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_16_07__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_23_40__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_10_12_2022_23_40__Changes_.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Motoren.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +44,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Stelz/PycharmProjects/Entscheidungen-unter-Risiko-und-statistische-Datenanalyse/Fallstudie 1&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;configurable.group.appearance&quot;
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
@@ -49,7 +55,7 @@
       <recent name="C:\Users\Stelz\PycharmProjects\Entscheidungen-unter-Risiko-und-statistische-Datenanalyse\Fallstudie 1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test">
+  <component name="RunManager">
     <configuration name="Algo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Neuer Ordner" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -93,7 +99,7 @@
       <method v="2" />
     </configuration>
     <configuration name="fefef" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Entscheidungen-unter-Risiko-und-statistische-Datenanalyse" />
+      <module name="Neuer Ordner" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
@@ -113,16 +119,17 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Neuer Ordner" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="D:\Lagerprogramm\venv\Scripts\python.exe" />
+      <option name="SDK_NAME" value="Python 3.10 (Lagerprogramm)" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 2" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 2/test.py" />
@@ -142,9 +149,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.Algo" />
         <item itemvalue="Python.fefef" />
+        <item itemvalue="Python.Algo" />
         <item itemvalue="Python.Auswerter" />
       </list>
     </recent_temporary>
