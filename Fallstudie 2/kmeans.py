@@ -52,8 +52,8 @@ def k_means():
     k = k
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
-
-    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
+    # mischt die indexe des arrays zufällig durch und wählt die ersten k davon aus
+    mittelpunkt_cluster = data_kmeans[np.random.permutation(len(data_kmeans))[:k]]
 
     for i in range(maximale_sortier_wiederholungen):
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten

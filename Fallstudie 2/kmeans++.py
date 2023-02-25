@@ -39,30 +39,38 @@ def a_schritt2():
     # Fügt alle arrays die an der keweiligen stellle in data gespeicher sind zu einem größen aray zusammen
     data = np.concatenate(data)
 
+def kmeans_pp_init(data, k):
+    mittelpunktes = np.empty((k, data.shape[1]))
+    mittelpunktes[0] = data[np.random.choice(len(data))]
+    for i in range(1, k):
+        distances = np.linalg.norm(data - mittelpunktes[:i], axis=1)
+        wahrheinlichkeit = distances / np.sum(distances)
+        mittelpunktes[i] = data[np.random.choice(len(data), p=wahrheinlichkeit)]
+    return mittelpunktes
 
 
 def k_means_plusPlus():
     global k, data
 
+    global k, data
+    # array wird kopiert um daten bei zu behalten und dabei standartiesiert
     data_kmeans = (data - np.mean(data)) / np.std(data)
+    print("Standatiesierte Daten ")
+    print(data_kmeans)
     # Maximale wiederholungen des verfahrens
     maximale_sortier_wiederholungen = 100
     # Anzahl der Cluster ist aktuell einf wert von k
     k = k
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
-                                                                                # size = anzahl der gewählten datenpunkte
-                                                                                            #replace = keine doppelten datenpunkte
-    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
+    #mischt die indexe des arrays zufällig durch und wählt die ersten k davon aus
+
+   # mittelpunkt_cluster = data_kmeans[np.random.permutation(len(data_kmeans))[:k]]
+    mittelpunkt_cluster =kmeans_pp_init(data_kmeans,k)
 
     for i in range(maximale_sortier_wiederholungen):
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
-        # (Wurzel ziehen (np.sum gibt die summer der 2 quadrierten subtraktionen zurück ))
-        # form : [[distanz1 zu mitte1, distanz1 zu mitte2 ......... ]
-        #        [distanz1 zu mitte1, distanz1 zu mitte2.........]]
-        # -1 ist die dimension
-        distances = np.sqrt(np.sum((data_kmeans[:, np.newaxis] - mittelpunkt_cluster) ** 2, axis=-1))
-
+        distances = np.linalg.norm(data_kmeans[:, np.newaxis] - mittelpunkt_cluster, axis=-1)
         # weist jeden punkt dem cluster zu dem er die niedrigste distanz hat
         # in dem er in der dimesnsion -1 für jeden wert prüdft wo der kleinste wert steht
         labels = np.argmin(distances, axis=-1)
@@ -86,7 +94,6 @@ def k_means_plusPlus():
     plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
     plt.show()
-
     #------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
 a_schritt1()
