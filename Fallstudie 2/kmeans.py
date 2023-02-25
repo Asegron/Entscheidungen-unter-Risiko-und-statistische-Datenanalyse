@@ -52,8 +52,9 @@ def k_means():
     k = k
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
-
-    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
+    # mischt die indexe des arrays zufällig durch und wählt die ersten k davon aus
+    mittelpunkt_cluster = data_kmeans[np.random.permutation(len(data_kmeans))[:k]]
+    anfang= 0
 
     for i in range(maximale_sortier_wiederholungen):
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
@@ -78,15 +79,16 @@ def k_means():
             break  # wenn sich die zuordnungen nicht mehr ändern wird das programm beendet
 
         mittelpunkt_cluster = mittelpunkte_neu
-        plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
-        plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
-        plt.show()
+        if anfang ==0:
+            plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
+            plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
+            plt.show()
+            anfang =1
 
-    # Plot the data
+        # Plot the data
     plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
     plt.show()
-
     #------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
 a_schritt1()

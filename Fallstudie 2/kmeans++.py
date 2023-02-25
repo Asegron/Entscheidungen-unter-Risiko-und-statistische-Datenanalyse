@@ -40,20 +40,44 @@ def a_schritt2():
     data = np.concatenate(data)
 
 
+def kmeansinit(data, k):
+    middelwerte = np.empty((k, data.shape[1]))
+    # Schritt 1: Wähle das erste Zentrum zufällig
+    middelwerte[0] = data[np.random.choice(len(data))]
+
+    # Schritte 2-4
+    for i in range(1, k):
+        # Berechne die quadrierten Distanzen zu allen Zentren
+        abstaende = np.min(((data[:, None] - middelwerte[:i]) ** 2).sum(axis=2), axis=1)
+
+
+
+        # Wähle das nächste Zentrum basierend auf der Wahrscheinlichkeit
+        #abstaende / abstaende.sum() ist die abstaende
+        middelwerte[i] = data[np.random.choice(len(data), p=(abstaende / abstaende.sum()))]
+
+    return middelwerte
+
 
 def k_means_plusPlus():
     global k, data
 
+    global k, data
+    # array wird kopiert um daten bei zu behalten und dabei standartiesiert
     data_kmeans = (data - np.mean(data)) / np.std(data)
+    print("Standatiesierte Daten ")
+    print(data_kmeans)
     # Maximale wiederholungen des verfahrens
     maximale_sortier_wiederholungen = 100
     # Anzahl der Cluster ist aktuell einf wert von k
     k = k
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
-                                                                                # size = anzahl der gewählten datenpunkte
-                                                                                            #replace = keine doppelten datenpunkte
-    mittelpunkt_cluster = data_kmeans[np.random.choice(np.arange(len(data_kmeans)), size=k, replace=False)]
+    # mischt die indexe des arrays zufällig durch und wählt die ersten k davon aus
+
+    # mittelpunkt_cluster = data_kmeans[np.random.permutation(len(data_kmeans))[:k]]
+    mittelpunkt_cluster = kmeansinit(data_kmeans, k)
+    anfang= 0
 
     for i in range(maximale_sortier_wiederholungen):
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
@@ -78,16 +102,18 @@ def k_means_plusPlus():
             break  # wenn sich die zuordnungen nicht mehr ändern wird das programm beendet
 
         mittelpunkt_cluster = mittelpunkte_neu
-        plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
-        plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
-        plt.show()
+        if anfang ==0:
+            plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
+            plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
+            plt.show()
+            anfang =1
 
-    # Plot the data
+        # Plot the data
     plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
     plt.show()
+    # ------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
-    #------------------------------------------Symbolische MAin area für die aufrufe _____________________________
 
 a_schritt1()
 a_schritt2()
