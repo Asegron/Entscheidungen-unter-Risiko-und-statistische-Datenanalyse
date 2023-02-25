@@ -46,17 +46,15 @@ def k_means():
     data_kmeans =  (data - np.mean(data)) / np.std(data)
     print("Standatiesierte Daten ")
     print(data_kmeans)
-    # Maximale wiederholungen des verfahrens
-    maximale_sortier_wiederholungen = 100
-    # Anzahl der Cluster ist aktuell einf wert von k
-    k = k
+
 
     # zufällige wahl der  ersten cluster mittelpunkte in data[]
     # mischt die indexe des arrays zufällig durch und wählt die ersten k davon aus
     mittelpunkt_cluster = data_kmeans[np.random.permutation(len(data_kmeans))[:k]]
     anfang= 0
+    fertig= -128
 
-    for i in range(maximale_sortier_wiederholungen):
+    while fertig != 0:
         # Berechnet die distanz zwischen den Datenpunkten und den Cluster Mittelpunkten
         # (Wurzel ziehen (np.sum gibt die summer der 2 quadrierten subtraktionen zurück ))
         # form : [[distanz1 zu mitte1, distanz1 zu mitte2 ......... ]
@@ -84,7 +82,8 @@ def k_means():
             plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='red', s=10, alpha=0.5)
             plt.show()
             anfang =1
-
+    else:
+        print("Iteration ist Fertig")
         # Plot the data
     plt.scatter(data_kmeans[:, 0], data_kmeans[:, 1], c=labels, cmap='plasma')
     plt.scatter(mittelpunkt_cluster[:, 0], mittelpunkt_cluster[:, 1], c='black', s=10)
