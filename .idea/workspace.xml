@@ -4,14 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="kmeans++&#10;done">
-      <change afterPath="$PROJECT_DIR$/Fallstudie 2/Aufgabe2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Fallstudie 2/richtig.py" afterDir="false" />
+    <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="average-linkage">
       <change beforePath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/kmeans.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/kmeans.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 2/richtig.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/richtig.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fallstudie 2/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,20 +55,20 @@
       <recent name="C:\Users\Stelz\PycharmProjects\Entscheidungen-unter-Risiko-und-statistische-Datenanalyse\Fallstudie 1" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.Aufgabe2">
-    <configuration name="Aufgabe2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="Algo" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Neuer Ordner" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="C:\Users\mjmay\AppData\Local\Programs\Python\Python311\python.exe" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 2" />
-      <option name="IS_MODULE_SDK" value="false" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 1" />
+      <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 2/Aufgabe2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 1/Algo.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -91,6 +90,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="fefef" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Neuer Ordner" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 2/fefef.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -141,27 +161,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="richtig" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Neuer Ordner" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Fallstudie 2" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Fallstudie 2/richtig.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="Neuer Ordner" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -185,19 +184,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.test" />
-      <item itemvalue="Python.Aufgabe2" />
-      <item itemvalue="Python.richtig" />
       <item itemvalue="Python.kmeans" />
       <item itemvalue="Python.Average-Linkerage" />
       <item itemvalue="Python.kmeans++" />
+      <item itemvalue="Python.Algo" />
+      <item itemvalue="Python.fefef" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Aufgabe2" />
-        <item itemvalue="Python.Average-Linkerage" />
-        <item itemvalue="Python.richtig" />
         <item itemvalue="Python.kmeans" />
         <item itemvalue="Python.kmeans++" />
+        <item itemvalue="Python.Average-Linkerage" />
+        <item itemvalue="Python.fefef" />
+        <item itemvalue="Python.Algo" />
       </list>
     </recent_temporary>
   </component>
@@ -329,14 +328,7 @@
       <option name="project" value="LOCAL" />
       <updated>1677335758341</updated>
     </task>
-    <task id="LOCAL-00018" summary="kmeans++&#10;done">
-      <created>1677336893659</created>
-      <option name="number" value="00018" />
-      <option name="presentableId" value="LOCAL-00018" />
-      <option name="project" value="LOCAL" />
-      <updated>1677336893659</updated>
-    </task>
-    <option name="localTasksCounter" value="19" />
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

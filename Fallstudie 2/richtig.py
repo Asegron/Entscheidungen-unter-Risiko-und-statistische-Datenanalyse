@@ -12,7 +12,6 @@ data = []
 # Anzahl der Cluster
 k = random.randint(1, 10)
 
-
 # Legt die Datenpunkte an für k zwischen 1 und 10 an
 def datenerzeugung():
     global clusters, data
@@ -37,14 +36,41 @@ datenerzeugung()
 
 # Normalisierung der Daten
 scaler = StandardScaler()
-X_norm = scaler.fit_transform(data)
+x_norm = scaler.fit_transform(data)
+
+# Berechnung des euklidischen Abstands
+def euklidischeDistanz(x1, x2):
+    return np.sqrt(np.sum((x1 - x2) ** 2))
+
+#Berechnet den average-linkage für 2 cluster
+def averageLinkage(cluster1, cluster2):
+    abstand = 0
+    for i in range(len(cluster1)):
+        for j in range(len(cluster2)):
+            abstand += euklidischeDistanz(cluster1[i], cluster2[j])
+    return abstand / (len(cluster1) * len(cluster2))
+
+#Fehlerhafter/unvollständiger Code für das Clustering. Solange es mehr Cluster als k gibt werden Cluster mit größter
+#Ähnlichkeit zusammengeführt bis nur noch k Cluster übrig bleiben.
+def averageLinkageClustering():
+    while len(clusters) > k:
+        distances = []
+        for i in range(len(clusters)):
+            for j in range(i+1, len(clusters)):
+                distances.append((averageLinkage(clusters[i], clusters[j]), i, j))
+            distances.sort()
+            min_distance, i, j = distances[0]
+            merged_cluster = clusters[i] + clusters[j]
+            clusters.pop(j)
+            clusters.pop(i)
+            clusters.append(merged_cluster)
+        return clusters
 
 # Berechnung der Distanzmatrix
-dist_matrix = linkage(X_norm, method='average', metric='euclidean')
+dist_matrix = linkage(x_norm , method='average', metric='euclidean')
 
 # Erstellung des Dendrogramms
-dend = dendrogram(dist_matrix)
-
+dend1 = dendrogram(dist_matrix)
 # Anzeigen des Dendrogramms
 plt.title("Dendrogram")
 plt.xlabel("Datenpunkte")
