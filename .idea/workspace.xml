@@ -5,12 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8563d877-b582-4093-8aed-7e842f583810" name="Changes" comment="average-linkage">
-      <change beforePath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Neuer Ordner.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/markov.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/markov2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/Average-Linkerage.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/richtig.py" beforeDir="false" afterPath="$PROJECT_DIR$/Fallstudie 2/richtig.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fallstudie 2/test.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,6 +23,19 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="6fe78cc6-0638-4f94-b98b-2c82e7094396" />
+        <option name="url" value="https://github.com/Asegron/Entscheidungen-unter-Risiko-und-statistische-Datenanalyse.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -328,7 +338,14 @@
       <option name="project" value="LOCAL" />
       <updated>1677335758341</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="average-linkage">
+      <created>1677385489731</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1677385489731</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -350,6 +367,7 @@
     <MESSAGE value="KLassenhäufigkeiten tabelle fertig" />
     <MESSAGE value="standartisieriung" />
     <MESSAGE value="kmeans++&#10;done" />
-    <option name="LAST_COMMIT_MESSAGE" value="kmeans++&#10;done" />
+    <MESSAGE value="average-linkage" />
+    <option name="LAST_COMMIT_MESSAGE" value="average-linkage" />
   </component>
 </project>
