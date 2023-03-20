@@ -24,13 +24,13 @@ print("Die initiale Zustandsverteilung ist:\n", initialeVerteilung)
 def berechneWahrscheinlichkeit(initialeVerteilung, uebergangsmatrix, n):
     aktuelleVerteilung = initialeVerteilung
     for i in range(n):
-        new_distribution = []
+        neueVerteilung = []
         for j in range(len(initialeVerteilung)):
             neueWahrscheinlichkeit = 0
             for k in range(len(initialeVerteilung)):
                 neueWahrscheinlichkeit += aktuelleVerteilung[k] * uebergangsmatrix[k][j]
-            new_distribution.append(neueWahrscheinlichkeit)
-        aktuelleVerteilung = new_distribution
+            neueVerteilung.append(neueWahrscheinlichkeit)
+        aktuelleVerteilung = neueVerteilung
     return aktuelleVerteilung
 
 # Printe die Wahrscheinlichkeiten fuer n = 1, 2, 3, ..., 100, 200, 300, ...
