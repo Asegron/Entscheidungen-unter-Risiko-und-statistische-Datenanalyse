@@ -2,6 +2,14 @@ import math
 import random
 import numpy as np
 import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram
+from sklearn.preprocessing import StandardScaler
+import random
+import numpy as np
+from scipy.cluster.hierarchy import dendrogram, linkage
+from sklearn.preprocessing import StandardScaler
+import matplotlib.pyplot as plt
+from scipy.cluster.hierarchy import dendrogram
 
 clusters = []
 data = []
@@ -19,7 +27,7 @@ def datenerzeugung():
     for punkte in clusters:
         # der mittelwert it der vorher generierte ausgangspunkt des clusters
         mittelwert = punkte
-        sigma = random.randint(1, 3)
+        sigma = random.randint(1, 100)
         # ((mittelwert (oben generiert ))(sigma ist zufällig zwischen 1 und 3 (vorgabe))(100= anzahl der wert )(2 -> es sind tupel -> 2 dimensionaltät ))
         cluster = np.random.normal(mittelwert, sigma, (100, 2))
         data.append(cluster)
@@ -84,7 +92,11 @@ def k_means():
 
 
 def kmeansinit(data, k):
+
+    # dem array wird eine form forgegben wird so vom interpreter verlangt
+
     middelwerte = np.empty((k, data.shape[1]))
+
     # Schritt 1: Wähle das erste Zentrum zufällig
     middelwerte[0] = data[np.random.choice(len(data))]
 
@@ -106,11 +118,13 @@ def k_means_plusPlus():
     global k, data
 
     # array wird kopiert um daten bei zu behalten und dabei standartiesiert
+                           #mittelwert     # standart abweichung
     data_kmeans = (data - np.mean(data)) / np.std(data)
     print("Standatiesierte Daten ")
     print(data_kmeans)
     # Maximale wiederholungen des verfahrens
     maximale_sortier_wiederholungen = 100
+
     # Anzahl der Cluster ist aktuell einf wert von k
     k = k
 
@@ -163,3 +177,18 @@ def k_means_plusPlus():
 datenerzeugung()
 k_means()
 k_means_plusPlus()
+
+
+
+scaler = StandardScaler()
+X_norm = scaler.fit_transform(data)
+
+# Berechnung der Distanzmatrix
+dist_matrix = linkage(X_norm, method='average', metric='euclidean')
+
+
+dend = dendrogram(dist_matrix)
+plt.title("Dendrogram")
+plt.xlabel("Datenpunkte")
+plt.ylabel("Abstand")
+plt.show()

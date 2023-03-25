@@ -34,9 +34,6 @@ def datenerzeugung():
 # Beispiel-Daten
 datenerzeugung()
 
-# Normalisierung der Daten
-scaler = StandardScaler()
-x_norm = scaler.fit_transform(data)
 
 # Berechnung des euklidischen Abstands
 def euklidischeDistanz(x1, x2):
@@ -66,13 +63,3 @@ def averageLinkageClustering():
             clusters.append(merged_cluster)
         return clusters
 
-# Berechnung der Distanzmatrix
-dist_matrix = linkage(x_norm , method='average', metric='euclidean')
-
-# Erstellung des Dendrogramms
-dend1 = dendrogram(dist_matrix)
-# Anzeigen des Dendrogramms
-plt.title("Dendrogram")
-plt.xlabel("Datenpunkte")
-plt.ylabel("Abstand")
-plt.show()
