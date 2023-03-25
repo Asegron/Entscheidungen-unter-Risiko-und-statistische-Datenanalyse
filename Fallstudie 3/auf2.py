@@ -124,13 +124,3 @@ while mach<200 :
 plt.imshow(feld, cmap='hot')
 plt.show()
 
-
-
-
-
-
-
-
-
-
-
