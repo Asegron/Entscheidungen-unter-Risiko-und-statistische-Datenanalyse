@@ -69,9 +69,10 @@ with open('wuerfel.txt', 'r') as file:
     T2[:, 0] = 0
 
     # Iterate through the observations updating the tracking tables
+
     for i in range(1, T):
-        T1[:, i] = np.max(T1[:, i - 1] * uebergangswahrscheinlichkeiten.T * emissionswahrscheinlichkeiten[np.newaxis, :, wurfliste[i]].T, 1)
-        T2[:, i] = np.argmax(T1[:, i - 1] * uebergangswahrscheinlichkeiten.T, 1)
+        T1[:, i] = np.max(T1[:, i - 1] * uebergangswahrscheinlichkeiten * emissionswahrscheinlichkeiten[np.newaxis, :, wurfliste[i]], 1)
+        T2[:, i] = np.argmax(T1[:, i - 1] * uebergangswahrscheinlichkeiten, 1)
 
     # Build the output, optimal model trajectory
     x = np.empty(T, 'B')
