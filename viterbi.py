@@ -45,7 +45,7 @@ class Viterbi:
             opt.insert(0, V[t + 1][previous]["prev"])
             previous = V[t + 1][previous]["prev"]
 
-        print ("Die Schritte der Zustaende sind " + " ".join(opt) + " mit der hochsten Wahrscheinlichkeit von %s" % max_prob)
+        print ("Die Schritte der Zustaende sind " + " ".join(opt) + " mit der hoechsten Wahrscheinlichkeit von %s" % max_prob)
 
     #Erstellt eine DP-Tabelle für die Pfade als visuelle Dastellung
     def dptable(self, V):
